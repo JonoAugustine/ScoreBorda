@@ -1,9 +1,11 @@
-# ScoreBorda 5
+# ScoreBorda 4
 
 The ultimate decision making tool for the troubled mind
 
 ----------------
 ----------------
+
+https://jonoaugustine.gitlab.io/ScoreBorda
 
 ## Definitions
 
@@ -32,8 +34,6 @@ the Borda is able to remove much of the overwhelming and confusing aspects of co
 
 - Local Data persistance
 - Remote Data persistance <sup>?</sup>
-
-## Discussions
 - Candidate-specific Features
 	- In SB 0.1, and (as of) SB 0.2.72d634d, the inability to compare candidates that do not share
 	  all of their features has been a limitation on the variety of candidates that can be compared.
