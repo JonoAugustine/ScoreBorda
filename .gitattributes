@@ -1,8 +1,0 @@
-AGZDesk/WindowsNoEditor/AGZ_2/Binaries/Win64/AGZ_2.exe filter=lfs diff=lfs merge=lfs -text
-AGZDesk/WindowsNoEditor/AGZ_2.exe filter=lfs diff=lfs merge=lfs -text
-AGZDesk/WindowsNoEditor/AGZ_2/Content/Paks/AGZ_2-WindowsNoEditor.pak filter=lfs diff=lfs merge=lfs -text
-AGZMob/Android_Multi/** filter=lfs diff=lfs merge=lfs -text
-*.exe filter=lfs diff=lfs merge=lfs -text
-*.pak filter=lfs diff=lfs merge=lfs -text
-*.obb filter=lfs diff=lfs merge=lfs -text
-*.apk filter=lfs diff=lfs merge=lfs -text
