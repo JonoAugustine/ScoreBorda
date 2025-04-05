@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "style/fix": "prettier --config .prettierrc.yaml --write src *.ts",
+    "style/check": "prettier --config .prettierrc.yaml --check src *.ts"
   },
   "dependencies": {
     "next": "15.2.4",
@@ -18,12 +20,14 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.1",
-    "@types/node": "^20",
+    "@types/node": "^20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "conventional-changelog-eslint": "^6.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "prettier": "^3.5.3",
+    "sass": "^1.86.3",
     "semantic-release": "^24.2.3",
     "typescript": "^5"
   }
