@@ -1,0 +1,31 @@
+@use "variables" as *;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  color: $c-text;
+  background-color: $c-bg;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+p {
+  font-weight: bold;
+  line-height: 120%;
+}

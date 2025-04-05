@@ -1,0 +1,36 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+header.page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh 0;
+
+  h1 {
+    &:before,
+    &:after {
+      font-size: 2rem;
+    }
+
+    &::before {
+      content: "S";
+      color: $c-text;
+    }
+
+    &::after {
+      content: "B";
+      color: $c-main;
+    }
+
+    @include breakpoint(tablet) {
+      &::before {
+        content: "Score";
+      }
+
+      &::after {
+        content: "Borda";
+      }
+    }
+  }
+}

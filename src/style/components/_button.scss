@@ -1,0 +1,46 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+button {
+  padding: 0.5rem 10%;
+  margin: $margin;
+  border-radius: 3rem;
+
+  font-size: 1rem;
+  background-color: $c-main;
+  color: $c-text;
+  cursor: pointer;
+
+  transition: transform 0.15s ease-in-out, box-shadow 0.2s ease-in-out,
+    background-color 0.15s ease-in-out;
+
+  &[invert="true"] {
+    color: $c-main;
+    background-color: $c-text;
+
+    &:hover {
+      background-color: lighten($c-text, 3%);
+    }
+
+    &:active {
+      background-color: darken($c-text, 5%);
+    }
+  }
+
+  &:hover {
+    background-color: lighten($c-main, 3%);
+    transform: translateY(-5%);
+    @include shadow;
+  }
+
+  &:active {
+    background-color: darken($c-main, 5%);
+    transform: translateY(1%);
+    box-shadow: none;
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}

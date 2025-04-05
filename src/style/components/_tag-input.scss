@@ -1,0 +1,44 @@
+@use "../variables" as *;
+
+.tag-input {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  form {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: fit-content;
+
+    .text-input {
+      margin-right: 0;
+    }
+
+    button {
+      background-color: transparent;
+      color: $c-main;
+      padding: 0;
+      margin: 0 1px;
+    }
+  }
+
+  .tag-container {
+    margin-top: 1rem;
+    flex-grow: 1;
+
+    button {
+      background-color: transparent;
+      padding: 0.1rem;
+      color: $c-text;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: line-through;
+        color: red;
+      }
+    }
+  }
+}

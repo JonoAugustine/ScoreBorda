@@ -1,0 +1,39 @@
+@use "page" as *;
+@use "../variables" as *;
+
+.page.borda {
+  @include page;
+
+  align-items: center;
+  justify-content: space-between;
+
+  header {
+    flex-shrink: 1;
+    text-align: center;
+    font-size: 7vw;
+
+    span:last-child {
+      color: $c-main;
+    }
+  }
+
+  .tag-input {
+    flex-grow: 1;
+
+    &[empty="true"] {
+      flex-grow: 0;
+
+      + p {
+        flex-grow: 1;
+        max-width: 85%;
+      }
+    }
+  }
+
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

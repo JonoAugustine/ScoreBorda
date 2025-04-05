@@ -1,0 +1,22 @@
+@use "../variables" as *;
+
+footer.page-footer {
+  padding: 1rem 0 0.5rem 1rem;
+
+  a {
+    color: $c-text;
+
+    &::before {
+      content: "Made By ";
+    }
+
+    &::after {
+      content: "Jono";
+    }
+
+    &:hover::after {
+      font-weight: bold;
+      color: $c-main;
+    }
+  }
+}

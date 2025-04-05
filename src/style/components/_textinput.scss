@@ -1,0 +1,62 @@
+@use "../variables" as *;
+
+.text-input {
+  position: relative;
+  width: 100%;
+  margin: 1rem auto $margin auto;
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding-top: $padding * 3;
+    background-color: transparent;
+    border: none;
+    color: unset;
+    outline: none;
+
+    &:focus + label.floating::after,
+    &:valid + label.floating::after {
+      transform: translateX(0%);
+      transition: all 0.3s ease;
+      opacity: 100;
+    }
+
+    &:focus + label.floating > .content-name,
+    &:valid + label.floating > .content-name {
+      transform: translateY(-150%);
+      font-size: small;
+      color: $c-main;
+      transition: all 0.3s ease;
+    }
+  }
+
+  label.floating {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid $c-text;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      height: 100%;
+      width: 100%;
+      border-bottom: 2px solid $c-main;
+      transform: translateX(-100%);
+      transition: all 0.3 ease;
+      opacity: 0;
+    }
+
+    .content-name {
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+  }
+}
