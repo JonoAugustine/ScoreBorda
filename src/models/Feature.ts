@@ -5,11 +5,14 @@
  * it's a valid feature.
  */
 export default class Feature {
+  name: string
+  score: number
+
   /**
    * @param {string} name - The name of the Feature.
    * @param {number} [score=0] - The calibration score or candidate's feature score.
    */
-  constructor(name, score = 0) {
+  constructor(name: string, score: number = 0) {
     this.name = name
     this.score = score
   }
@@ -17,5 +20,5 @@ export default class Feature {
   /**
    * @returns {Feature} a new instance of this Feature with a reset score.
    */
-  clone = () => new Feature(this.name);
+  clone = (): Feature => new Feature(this.name)
 }

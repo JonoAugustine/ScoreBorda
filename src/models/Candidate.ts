@@ -6,12 +6,16 @@ import Feature from "./Feature"
  * candidates. Candidates consist of a name, score, and set of features.
  */
 export default class Candidate {
+  name: string
+  features: Feature[]
+  score: number
+
   /**
    *
    * @param {string} name - The candidate's name
    * @param {Feature[]} features - The list of this Candidate's ScoreBorda Features
    */
-  constructor(name, features = []) {
+  constructor(name: string, features: Feature[] = []) {
     this.name = name
     this.features = features
     this.score = 0
@@ -20,5 +24,5 @@ export default class Candidate {
   /**
    * @returns {number} The sum of this candidate's feature scores.
    */
-  rawScore = () => this.features.reduce((sum, ftr) => sum + ftr.score, 0);
+  rawScore = (): number => this.features.reduce((sum, ftr) => sum + ftr.score, 0)
 }
