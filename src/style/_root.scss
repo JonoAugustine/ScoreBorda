@@ -10,19 +10,11 @@
 }
 
 html,
-body,
-#root,
-.app {
-  height: 100%;
+body {
+  height: 100vh;
   color: $c-text;
   background-color: $c-bg;
   font-family: Arial, sans-serif;
-}
-
-.app {
-  position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
 p {

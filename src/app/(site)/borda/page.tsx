@@ -37,7 +37,6 @@ export default function BordaPage() {
             }
             confirm={confirm}
             back={back}
-            reset={reset}
           />
         )
       // TODO case BordaState.CONFIRM:
@@ -57,7 +56,6 @@ export default function BordaPage() {
             }
             confirm={confirm}
             back={back}
-            reset={reset}
           />
         )
       default:

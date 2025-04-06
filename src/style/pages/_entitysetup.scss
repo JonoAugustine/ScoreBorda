@@ -1,0 +1,19 @@
+@use "page" as *;
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.page.entity-setup {
+  @include page;
+
+  .progress-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    width: fit-content;
+
+    button {
+      width: fit-content;
+      margin: 0 0.5rem;
+    }
+  }
+}

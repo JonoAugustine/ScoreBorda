@@ -1,6 +1,9 @@
 @use "../variables" as *;
 
 footer.page-footer {
+  position: fixed;
+  bottom: 0;
+  
   padding: 1rem 0 0.5rem 1rem;
 
   a {

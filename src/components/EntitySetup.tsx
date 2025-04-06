@@ -13,8 +13,6 @@ type EntitySetupProps = {
   confirm: () => void
   /** The function to go back to the previous state */
   back: () => void
-  /** The function to reset the setup */
-  reset: () => void
 }
 
 export default function EntitySetup(props: EntitySetupProps) {
@@ -25,11 +23,10 @@ export default function EntitySetup(props: EntitySetupProps) {
     removeEntity,
     confirm,
     back,
-    reset,
   } = props
 
   return (
-    <div>
+    <div className="page entity-setup">
       <header>
         <h2>
           <span>Add </span>
@@ -39,8 +36,8 @@ export default function EntitySetup(props: EntitySetupProps) {
           <p>
             Features help SB understand what is most important to you. They can
             be anything from red to votes for president of space to likes
-            kittens; as long as it describes some aspect of a candidate, it&aposs a
-            valid feature.
+            kittens; as long as it describes some aspect of a candidate,
+            it&aposs a valid feature.
           </p>
         ) : (
           <p>
@@ -56,9 +53,12 @@ export default function EntitySetup(props: EntitySetupProps) {
         add={addEntity}
         remove={removeEntity}
       />
-      <button onClick={confirm}>Confirm</button>
-      <button onClick={back} className="invert">Back</button>
-      <button onClick={reset}>Reset</button>
+      <div className="progress-buttons">
+        <button onClick={back} className="invert">
+          Back
+        </button>
+        <button onClick={confirm}>Confirm</button>
+      </div>
     </div>
   )
 }

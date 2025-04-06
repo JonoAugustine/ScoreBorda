@@ -2,11 +2,14 @@
 @use "../mixins" as *;
 
 button {
-  padding: 0.5rem 10%;
+  padding: 0.5rem 1rem;
   margin: $margin;
-  border-radius: 3rem;
+  border-radius: 1rem;
 
   font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+
   background-color: $c-main;
   color: $c-text;
   cursor: pointer;
@@ -27,6 +30,16 @@ button {
     &:active {
       background-color: darken($c-text, 5%);
     }
+  }
+
+  &.accent {
+    color: $c-text;
+    background: $c-accent;
+  }
+
+  &.warn {
+    color: $c-text;
+    background: black;
   }
 
   &:hover {
