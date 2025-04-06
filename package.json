@@ -1,6 +1,6 @@
 {
   "name": "scoreborda",
-  "version": "5.0.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -11,6 +11,9 @@
     "style/check": "prettier --config .prettierrc.yaml --check src *.ts"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "next": "15.2.4",
     "react": "^19.1.0",
     "react-dom": "^19.0.0"

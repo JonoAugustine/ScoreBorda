@@ -16,7 +16,7 @@ button {
     box-shadow 0.2s ease-in-out,
     background-color 0.15s ease-in-out;
 
-  &[invert="true"] {
+  &.invert {
     color: $c-main;
     background-color: $c-text;
 

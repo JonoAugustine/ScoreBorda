@@ -20,7 +20,8 @@
   .tag-input {
     flex-grow: 1;
 
-    &[empty="true"] {
+    &[empty="true"],
+    &.empty {
       flex-grow: 0;
 
       + p {

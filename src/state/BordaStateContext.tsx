@@ -1,6 +1,29 @@
-import { Dispatch, useState, SetStateAction, createContext } from "react"
-import BordaState from "./BordaState"
-import { Feature, Candidate, Round } from "../models"
+import React, { Dispatch, SetStateAction, createContext, useState } from "react"
+import { Candidate, Feature } from "../models"
+import { BordaEntity } from "../models/BordaEntities"
+
+const BordaState = {
+  SETUP: {
+    FEATURES: "Features",
+    CANDIDATES: "Candidates",
+    CONFIRM: "Confirm",
+  },
+  RUNNING: {
+    CALIBRATION: "Calibration",
+    SCORING: "Scoring",
+  },
+  COMPLETE: "Complete",
+  flatMap: function (): string[] {
+    return [
+      this.SETUP.FEATURES,
+      this.SETUP.CANDIDATES,
+      this.SETUP.CONFIRM,
+      this.RUNNING.CALIBRATION,
+      this.RUNNING.SCORING,
+      this.COMPLETE,
+    ]
+  },
+}
 
 export type BordaStateCtxType = {
   features: Feature[]
@@ -16,16 +39,14 @@ export type BordaStateCtxType = {
   lastState: () => string
   reset: () => void
   iterable: Iterable<any> | null
-  setIterable: Dispatch<SetStateAction<Iterable<any> | null>>
+  setIterable: Dispatch<SetStateAction<Iterable<BordaEntity> | null>>
 }
 
 export const BordaStateCtx = createContext<BordaStateCtxType | null>(null)
 
-export const BordaStateContextProvider = (props) => {
+export const BordaStateCtxProvider = (props: React.PropsWithChildren) => {
   const [features, setFeatures] = useState<Feature[]>([])
-
   const [candidates, setCandidates] = useState<Candidate[]>([])
-
   const [state, setState] = useState<string>(BordaState.SETUP.FEATURES)
 
   // TODO change name to iterator
@@ -39,11 +60,14 @@ export const BordaStateContextProvider = (props) => {
   }
 
   const addFeature = (featureName: string) => {
-    setFeatures([...features, new Feature(featureName)])
+    setFeatures([...features, { name: featureName, score: 0 }])
   }
 
   const addCandidate = (candidateName: string) => {
-    setCandidates([...candidates, new Candidate(candidateName)])
+    setCandidates([
+      ...candidates,
+      { name: candidateName, score: 0, features: [] },
+    ])
   }
 
   const removeFeature = (featureName: string) => {
