@@ -2,6 +2,7 @@
   "name": "scoreborda",
   "version": "4.0.0",
   "private": true,
+  "packageManager": "pnpm@10.7.1",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
