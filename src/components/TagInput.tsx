@@ -28,7 +28,7 @@ export default function TagInput({ name, values, add, remove }: TagInputProps) {
       add(event.target[0].value)
       //setValues([...values, event.target[0].value])
       event.target[0].value = "" // clear text field
-      nameInput.current && nameInput.current.focus() // reset focus to input
+      nameInput.current.focus() // reset focus to input
     } else {
       // TODO toast saying duplicate
     }

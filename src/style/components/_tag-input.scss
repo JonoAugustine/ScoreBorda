@@ -28,6 +28,10 @@
   .tag-container {
     margin-top: 1rem;
     flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 0.5rem;
 
     button {
       background-color: transparent;

@@ -1,7 +1,7 @@
 "use client"
 
 import EntitySetup from "@/components/EntitySetup"
-import { BordaState } from "@/state/Borda"
+import { BordaStage } from "@/state/Borda"
 import { BordaCtx, BordaDispatchCtx } from "@/state/BordaContext"
 import { useContext, useEffect } from "react"
 
@@ -19,9 +19,9 @@ export default function BordaPage() {
    *
    * @param {string} state - The current state of the round
    */
-  const renderState = (state: BordaState) => {
+  const renderState = (state: BordaStage) => {
     switch (state) {
-      case BordaState.CANDIDATES:
+      case BordaStage.CANDIDATES:
         return (
           <EntitySetup
             entityType="candidate"
@@ -44,7 +44,7 @@ export default function BordaPage() {
       // TODO case BordaState.CALIBRATION:
       // TODO case BordaState.SCORING:
       // TODO case BordaState.COMPLETE:
-      case BordaState.FEATURES:
+      case BordaStage.FEATURES:
         return (
           <EntitySetup
             entityType="feature"

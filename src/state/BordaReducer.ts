@@ -1,4 +1,4 @@
-import { BordaState, type Borda } from "./Borda"
+import { BordaStage, type Borda } from "./Borda"
 
 type BordaActionType =
   | "ADD_FEATURE"
@@ -42,14 +42,14 @@ export default function bordaReducer(
         ),
       }
     case "NEXT_STATE":
-      return borda.state === BordaState.COMPLETE
+      return borda.state === BordaStage.COMPLETE
         ? borda
         : {
             ...borda,
             state: borda.state + 1,
           }
     case "LAST_STATE":
-      return borda.state === BordaState.FEATURES
+      return borda.state === BordaStage.FEATURES
         ? borda
         : {
             ...borda,
@@ -60,7 +60,7 @@ export default function bordaReducer(
         ...borda,
         features: [],
         candidates: [],
-        state: BordaState.FEATURES,
+        state: BordaStage.FEATURES,
       }
     default:
       throw Error(`Unknown action type: ${type}`)

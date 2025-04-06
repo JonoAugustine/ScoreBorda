@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useReducer } from "react"
-import { Borda, BordaState } from "./Borda"
+import { Borda, BordaStage } from "./Borda"
 import bordaReducer, { BordaAction } from "./BordaReducer"
 
 export const BordaCtx = createContext<Borda | null>(null)
@@ -14,7 +14,7 @@ export default function BordaProvider(
     props.borda ?? {
       features: [],
       candidates: [],
-      state: BordaState.FEATURES,
+      state: BordaStage.FEATURES,
     }
   )
 

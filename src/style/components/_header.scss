@@ -1,35 +1,60 @@
 @use "../variables" as *;
 @use "../mixins" as *;
 
-header.page-header {
+nav.navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 1vh 0;
+  padding: 0.5vh 1vw;
 
-  h1 {
-    &:before,
-    &:after {
-      font-size: 2rem;
-    }
+  header.page-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 
-    &::before {
-      content: "S";
-      color: $c-text;
-    }
+    h1 {
+      &:before,
+      &:after {
+        font-size: 2rem;
+      }
 
-    &::after {
-      content: "B";
-      color: $c-main;
-    }
-
-    @include breakpoint(tablet) {
       &::before {
-        content: "Score";
+        content: "S";
+        color: $c-text;
       }
 
       &::after {
-        content: "Borda";
+        content: "B";
+        color: $c-main;
+      }
+
+      @include breakpoint(tablet) {
+        &::before {
+          content: "Score";
+        }
+
+        &::after {
+          content: "Borda";
+        }
+      }
+    }
+  }
+
+  ul.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+
+    li {
+      a {
+        text-decoration: none;
+        color: $c-text;
+        font-size: 1rem;
+
+        &:hover {
+          color: $c-main;
+        }
       }
     }
   }

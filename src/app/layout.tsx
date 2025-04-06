@@ -1,20 +1,10 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
 import "../style/index.scss"
 
 import { config } from "@fortawesome/fontawesome-svg-core"
 import "@fortawesome/fontawesome-svg-core/styles.css"
+import Link from "next/link"
 config.autoAddCss = false
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
 
 export const metadata: Metadata = {
   title: "ScoreBorda",
@@ -28,11 +18,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header className="root-header">
-          <h1>ScoreBorda</h1>
-          <p>The ultimate decision making tool for the troubled mind</p>
-        </header>
+      <body className={``}>
+        <nav className="navbar">
+          <header className="page-header">
+            <Link href="/">
+              <h1>{""}</h1>
+            </Link>
+          </header>
+          <ul className="nav-links">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/borda">Borda</Link>
+            </li>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+          </ul>
+        </nav>
         {children}
         <footer className="page-footer">
           <a

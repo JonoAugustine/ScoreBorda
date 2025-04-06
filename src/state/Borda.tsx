@@ -1,6 +1,6 @@
-import { Candidate, Feature } from "../models"
+import { Candidate, Feature } from "./BordaEntities"
 
-export const enum BordaState {
+export const enum BordaStage {
   FEATURES = 0,
   CANDIDATES = 1,
   CONFIRM = 2,
@@ -12,5 +12,5 @@ export const enum BordaState {
 export type Borda = {
   features: Feature[]
   candidates: Candidate[]
-  state: BordaState
+  state: BordaStage
 }

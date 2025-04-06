@@ -39,7 +39,7 @@ export default function EntitySetup(props: EntitySetupProps) {
           <p>
             Features help SB understand what is most important to you. They can
             be anything from red to votes for president of space to likes
-            kittens; as long as it describes some aspect of a candidate, it's a
+            kittens; as long as it describes some aspect of a candidate, it&aposs a
             valid feature.
           </p>
         ) : (
