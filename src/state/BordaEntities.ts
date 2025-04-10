@@ -16,8 +16,8 @@ export type Feature = BordaEntity
  * SB's purpose is to aid you in understanding how you feel about about these
  * candidates. Candidates consist of a name, score, and set of features.
  */
-export type Candidate = BordaEntity & { features: Feature[] }
+export type Candidate = BordaEntity & { featureScores: number[] }
 
 export function scoreOf(candidate: Candidate): number {
-  return candidate.features.reduce((sum, ftr) => sum + ftr.score, 0)
+  return candidate.featureScores.reduce((sum, ftr) => sum + ftr, 0)
 }

@@ -1,0 +1,35 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.info-modal {
+  position: relative;
+
+  &:hover {
+    p {
+      z-index: 3;
+      display: block;
+      position: absolute;
+      top: 1vh;
+      left: -110%;
+      width: 80vw;
+      
+      padding: 2vh 2vw;
+      font-size: 3vh;
+      
+      border-radius: 0.5rem;
+      
+      background-color: color.adjust($c-accent, $lightness: -15%);
+      color: whitesmoke;
+
+      @include breakpoint("desktop") {
+        left: -5vw;
+        width: 30vw;
+      }
+    }
+  }
+
+  p {
+    display: none;
+  }
+}

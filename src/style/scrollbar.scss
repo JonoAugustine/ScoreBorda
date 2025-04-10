@@ -1,0 +1,21 @@
+@use "./variables/colors" as *;
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5vmin;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1vmin;
+  background: $shadow;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background: $c-accent;
+}

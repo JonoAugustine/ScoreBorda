@@ -5,15 +5,41 @@
 .page.entity-setup {
   @include page;
 
+  .setup-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .setup[data-active="false"] {
+    display: none;
+  }
+
+  .setup[data-active="false"] {
+    @include breakpoint("desktop") {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+  }
+
   .progress-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
     width: fit-content;
+    
 
     button {
       width: fit-content;
       margin: 0 0.5rem;
+    }
+
+    @include breakpoint("desktop") {
+      #toggle-view {
+        display: none;
+      }
     }
   }
 }

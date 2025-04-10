@@ -4,13 +4,17 @@
 // TODO Extract page stylings
 
 @mixin page {
-  width: 100%;
-  
+  width: 90%;
+
   padding: 0 0.5rem;
   margin: auto;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  @include breakpoint("desktop") {
+    width: 60%;
+  }
 
   &.history {
     header {
@@ -27,22 +31,5 @@
         margin-bottom: 1rem;
       }
     }
-  }
-}
-
-.calibration,
-.scoring {
-  text-align: center;
-
-  header > p {
-    font-size: x-large;
-  }
-
-  button {
-    min-width: 30%;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
-    font-size: xx-large;
   }
 }

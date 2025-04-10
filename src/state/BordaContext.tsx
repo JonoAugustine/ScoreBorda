@@ -14,7 +14,7 @@ export default function BordaProvider(
     props.borda ?? {
       features: [],
       candidates: [],
-      state: BordaStage.FEATURES,
+      stage: BordaStage.FEATURES,
     }
   )
 

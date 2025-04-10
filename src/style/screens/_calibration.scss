@@ -1,0 +1,46 @@
+@use "screen" as *;
+@use "sass:color";
+@use "../mixins";
+@use "../variables";
+
+.screen.calibration {
+  @include screen;
+
+  display: flex;
+  flex-direction: column;
+
+  .calibration-buttons {
+    margin-top: 2vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    button {
+      font-size: 3rem;
+      min-width: fit-content;
+
+      &:first-child {
+        margin-right: auto;
+        width: 80%;
+      }
+
+      &:last-child {
+        margin-top: 3rem;
+        width: 80%;
+        margin-left: auto;
+      }
+    }
+  }
+
+  .progress-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80vw;
+    margin-top: 10%;
+    justify-content: space-evenly;
+
+    button {
+      font-size: 1.3rem;
+    }
+  }
+}
