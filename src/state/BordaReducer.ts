@@ -80,7 +80,7 @@ export default function bordaReducer(
         ...borda,
         candidates: borda.candidates.map((candidate) => ({
           ...candidate,
-          featureScores: candidate.featureScores.map((_) => 0),
+          featureScores: candidate.featureScores.map(() => 0),
           score: 0,
         })),
       }

@@ -68,7 +68,6 @@ export default function BordaPage() {
               dispatch({ type: "REMOVE_CANDIDATE", payload: { name } })
             }
             confirm={confirm}
-            back={back}
           />
         )
       default:

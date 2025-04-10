@@ -10,7 +10,6 @@ type EntitySetupProps = {
   addCandidate: (name: string) => void
   removeCandidate: (name: string) => void
   confirm: () => void
-  back: () => void
 }
 
 type EntitySetupSectionProps = {
@@ -55,7 +54,6 @@ export default function EntitySetup(props: EntitySetupProps) {
     addCandidate,
     removeCandidate,
     confirm,
-    back,
   } = props
 
   const [view, setView] = useState<"features" | "candidates">("features")
