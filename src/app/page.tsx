@@ -14,8 +14,8 @@ export default function Home() {
           remove many of the overwhelming aspects of comparing several choices
           at once
         </p>
-        <Link href="/borda">
-          <button>Start</button>
+        <Link className="link-button" href="/borda">
+          Start
         </Link>
       </main>
     </div>

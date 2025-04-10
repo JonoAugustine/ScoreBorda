@@ -53,16 +53,14 @@
     gap: 1rem;
     align-items: center;
 
-    button {
-      font-size: 10vw;
-      border-radius: 3rem;
-
-      @include breakpoint(desktop, max) {
-        width: 80%;
-      }
+    .link-button {
+      font-size: 5vh;
+      margin-top: 10%;
+      margin-left: auto;
 
       @include breakpoint(desktop) {
         font-size: 4vw;
+        margin: 10% auto;
       }
     }
 
@@ -72,7 +70,7 @@
       line-height: 120%;
 
       @include breakpoint(desktop) {
-        font-size: 1vw;
+        font-size: 1.5rem;
       }
     }
   }

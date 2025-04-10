@@ -1,12 +1,15 @@
 @use "../variables" as *;
 @use "../mixins" as *;
+@use "sass:color";
 
 nav.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5vh 1vw;
+  padding: 0.5vh 2vw;
   max-width: 100vw;
+  
+  background-color: color.adjust($c-accent, $lightness: -40%);
 
   header.page-header {
     display: flex;
