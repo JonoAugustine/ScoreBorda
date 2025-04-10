@@ -5,7 +5,7 @@ The ultimate decision making tool for the troubled mind
 ----------------
 ----------------
 
-https://jonoaugustine.gitlab.io/ScoreBorda
+[View It Live](https://score-borda.vercel.app/)
 
 ## Definitions
 
