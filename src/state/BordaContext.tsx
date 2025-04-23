@@ -15,7 +15,6 @@ export default function BordaProvider(
     props.borda ?? {
       _id: nanoid(),
       name: "New Borda",
-      date: new Date(),
       features: [],
       candidates: [],
       stage: BordaStage.SETUP,

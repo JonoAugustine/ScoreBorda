@@ -10,7 +10,7 @@ export const enum BordaStage {
 
 export type Borda = {
   _id: string
-  date: Date
+  date?: Date
   name: string
   features: Feature[]
   candidates: Candidate[]

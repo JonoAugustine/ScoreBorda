@@ -12,66 +12,72 @@ export const shuffleArray = (a: any[]): any[] => {
   }
   return a
 }
+
 export class BordaIterable<T> {
-  /**
-   * @param {*[]} array - Array of borda items to iterate through
-   * @param {boolean} [shuffle=false] - whether the array should be shuffled or not
-   */
-  private array: T[]
-  private left: number
-  private right: number
+  private items: T[]
+  private leftIndex: number
+  private rightIndex: number
   hasNext: boolean = false
-  steps: number = 0
+  totalSteps: number = 0
+  stepsRemaining: number = 0
   currentPair: [T, T]
 
-  /**
-   * @constructor
-   * @param {T[]} array - Array of borda items to iterate through
-   * @param {boolean} [shuffle=false] - whether the array should be shuffled or not
-   */
-  constructor(array: T[], shuffle: boolean = false) {
-    this.array = array
-    /** The current static comparator  */
-    this.left = 0
-    /** The current mobile comparator */
-    this.right = 1
-    if (shuffle) shuffleArray(array)
+  constructor(items: T[], shuffle: boolean = false) {
+    this.items = items
+    this.leftIndex = 0
+    this.rightIndex = 1
+    if (shuffle) shuffleArray(items)
 
-    // Calculate the number of steps
-    for (let i = 1; i <= array.length; i++) {
-      this.steps += i * (array.length - i)
-    }
-    this.hasNext = this.steps > 0
-    this.currentPair = [this.array[this.left], this.array[this.right]]
+    // Calculate the total number of comparison steps
+    this.totalSteps = this.calculateTotalSteps(items.length)
+    this.stepsRemaining = this.totalSteps
+    this.hasNext = this.totalSteps > 0
+    this.currentPair = [this.items[this.leftIndex], this.items[this.rightIndex]]
   }
 
   /**
-   * Returns the current comparing pair of values then increments the right pointer.
-   * If the right pointer exceeds the array length, increments the left pointer and resets the right pointer.
-   * If the left pointer exceeds the array length, returns null.
-   * 
-   * _this function should be improved at some point_
-   * @returns {{0: T, 1: T}} the current comparing pair of values.
+   * Calculates the total number of comparisons possible for the given array length.
+   * @param {number} length - The length of the array.
+   * @returns {number} The total number of comparisons.
+   */
+  private calculateTotalSteps(length: number): number {
+    if (length < 2) {
+      return 0 // No comparisons possible for arrays with fewer than 2 elements
+    }
+    return (length * (length - 1)) / 2
+  }
+
+  /**
+   * Returns the current comparing pair of values and updates the indices for the next step.
+   * Throws an error if there are no more pairs to compare.
+   * @returns {[T, T]} The current comparing pair of values.
    */
   step = (): [T, T] => {
-    if (this.left >= this.array.length - 1) {
+    if (this.leftIndex >= this.items.length - 1) {
       throw Error("No more pairs to compare")
     }
 
-    this.currentPair = [this.array[this.left], this.array[this.right]]
-    this.right++
+    this.currentPair = [this.items[this.leftIndex], this.items[this.rightIndex]]
+    this.updateIndices()
+    this.stepsRemaining--
+    return this.currentPair
+  }
 
-    // If the right pointer exceeds the array length,
-    // increment the left pointer and reset the right pointer
-    if (this.right >= this.array.length) {
-      this.left++
-      this.right = this.left + 1
+  /**
+   * Updates the indices for the next comparison step.
+   */
+  private updateIndices(): void {
+    this.rightIndex++
+
+    // If the moving index exceeds the array length, update the static index and reset the moving index
+    if (this.rightIndex >= this.items.length) {
+      this.leftIndex++
+      this.rightIndex = this.leftIndex + 1
     }
 
-    if (this.left >= this.array.length - 1) {
+    // Update hasNext flag if no more comparisons are possible
+    if (this.leftIndex >= this.items.length - 1) {
       this.hasNext = false
     }
-
-    return this.currentPair
   }
 }

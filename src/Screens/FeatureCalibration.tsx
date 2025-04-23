@@ -14,10 +14,11 @@ export default function FeatureCalibration({
   // TODO refactor restart
   restart,
   cancel,
-  iterable,
+  iterable: _iterable,
   increaseFeatureScore,
   onComplete,
 }: FeatureCalibrationProps) {
+  const [iterable] = useState<BordaIterable<Feature>>(_iterable)
   const [left, setLeft] = useState<Feature>(iterable.currentPair[0])
   const [right, setRight] = useState<Feature>(iterable.currentPair[1])
 
@@ -26,6 +27,12 @@ export default function FeatureCalibration({
       const [_left, _right] = iterable.step()
       setLeft(_left)
       setRight(_right)
+      console.log(
+        "steps",
+        iterable.totalSteps,
+        "remaining",
+        iterable.stepsRemaining
+      )
     } else {
       onComplete()
     }
