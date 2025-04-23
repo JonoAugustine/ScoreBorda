@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+echo "Cloning hooks into .git/hooks/"
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+cp "$SCRIPT_DIR/pre-commit" .git/hooks
+cp "$SCRIPT_DIR/pre-push" .git/hooks
+
+echo "done"
