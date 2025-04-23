@@ -1,24 +1,27 @@
 import { useState } from "react"
 import { Feature } from "../state/BordaEntities"
 import { BordaIterable } from "../state/BordaIterable"
+import { BordaAction } from "../state/BordaReducer"
 
 type FeatureCalibrationProps = {
-  iterable: BordaIterable<Feature>
-  increaseFeatureScore: (feature: Feature, value: number) => void
+  features: Feature[]
+  dispatch: React.Dispatch<BordaAction>
   onComplete: () => void
   cancel: () => void
   restart: () => void
 }
 
 export default function FeatureCalibration({
+  features,
   // TODO refactor restart
   restart,
   cancel,
-  iterable: _iterable,
-  increaseFeatureScore,
+  dispatch,
   onComplete,
 }: FeatureCalibrationProps) {
-  const [iterable] = useState<BordaIterable<Feature>>(_iterable)
+  const [iterable] = useState<BordaIterable<Feature>>(
+    new BordaIterable<Feature>(features, true)
+  )
   const [left, setLeft] = useState<Feature>(iterable.currentPair[0])
   const [right, setRight] = useState<Feature>(iterable.currentPair[1])
 
@@ -38,13 +41,19 @@ export default function FeatureCalibration({
     }
   }
 
+  const increaseFeatureScore = (name: string, value: number) =>
+    dispatch({
+      type: "INCREASE_FEATURE_SCORE",
+      payload: { name, value },
+    })
+
   const addToLeft = () => {
-    increaseFeatureScore(left as Feature, 1)
+    increaseFeatureScore(left.name, 1)
     nextPair()
   }
 
   const addToRight = () => {
-    increaseFeatureScore(right as Feature, 1)
+    increaseFeatureScore(right.name, 1)
     nextPair()
   }
 

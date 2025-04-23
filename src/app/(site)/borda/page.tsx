@@ -27,13 +27,8 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
     case BordaStage.CALIBRATION:
       return (
         <FeatureCalibration
-          iterable={new BordaIterable<Feature>(borda.features, true)}
-          increaseFeatureScore={(name, value) =>
-            dispatch({
-              type: "INCREASE_FEATURE_SCORE",
-              payload: { name, value },
-            })
-          }
+          features={borda.features}
+          dispatch={dispatch}
           onComplete={confirm}
           cancel={back}
           restart={() => {
