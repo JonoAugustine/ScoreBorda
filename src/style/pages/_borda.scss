@@ -8,13 +8,13 @@
   justify-content: space-between;
 
   header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 1vh 0;
+    width: 100%;
+    padding-bottom: 5px;
+    border-bottom: 1px solid $c-main;
 
-    h2 {
-      font-size: 5vh;
+    h1 {
+      text-align: left;
+      font-size: 3vh;
     }
   }
 }
