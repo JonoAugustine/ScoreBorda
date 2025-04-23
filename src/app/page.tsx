@@ -4,7 +4,10 @@ export default function Home() {
   return (
     <div className="page home">
       <header>
-        <h1>{""}</h1>
+        <div>
+          <h1>Score</h1>
+          <h1>Borda</h1>
+        </div>
         <h4>The ultimate decision making tool for the troubled mind</h4>
       </header>
       <main>

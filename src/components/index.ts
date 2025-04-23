@@ -1,4 +1,5 @@
 export { default as InfoModal } from "./InfoModal"
 export { default as TagInput } from "./TagInput"
 export { default as TextInput } from "./TextInput"
-
+export { default as Navbar } from "./Navbar"
+export { default as Footer } from "./Footer"
