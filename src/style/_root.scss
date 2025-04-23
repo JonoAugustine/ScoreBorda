@@ -21,3 +21,19 @@ p {
   font-weight: normal;
   line-height: 120%;
 }
+
+.main {
+  color: $c-main;
+}
+
+.accent {
+  color: $c-accent;
+}
+
+.disabled {
+  color: $c-disabled;
+}
+
+.italic {
+  font-style: italic;
+}

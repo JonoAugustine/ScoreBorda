@@ -5,43 +5,37 @@
 .page.home {
   @include page;
 
-  padding: 0 10%;
-
-  @include breakpoint(desktop) {
-    padding: 0 20%;
-  }
-
   header {
-    width: fit-content;
-    text-align: center;
-    padding-bottom: 2vh;
+    width: 100%;
+    text-align: left;
+    padding-bottom: 10px;
 
-    div {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 2vh;
+    h1 {
+      padding: 0.5rem 0;
+      font-size: 6vh;
 
-      h1 {
-        margin: 5% 0;
-        font-size: 14vw;
+      @include breakpoint(tablet) {
+        font-size: 6.6vh;
+      }
 
-        @include breakpoint(desktop) {
-          margin: 1%;
-          font-size: 5vw;
-        }
+      @include breakpoint(desktop) {
+        font-size: 8vh;
+      }
+
+      .highlight-ultimate {
+        color: $c-main;
+      }
+
+      .highlight-troubled {
+        padding: 0 0.6rem;
+        background-color: $c-main;
       }
     }
 
-    h4 {
-      font-size: 5.5vw;
-      line-height: 100%;
-
-      @include breakpoint(desktop) {
-        font-size: 2vw;
-      }
+    .divisor {
+      width: 80%;
+      margin: 10px auto;
+      border-bottom: 1px solid $c-text;
     }
   }
 
@@ -54,20 +48,18 @@
     align-items: center;
 
     .link-button {
-      font-size: 5vh;
-      margin-top: 10%;
-      margin-left: auto;
+      font-size: 4vh;
+      margin: 10% 0 0 auto;
 
       @include breakpoint(desktop) {
-        font-size: 4vw;
+        font-size: 6vh;
         margin: 10% auto;
       }
     }
 
     p {
-      font-size: 4.5vw;
-      font-weight: 600;
-      line-height: 120%;
+      font-size: 3vh;
+      line-height: 130%;
 
       @include breakpoint(desktop) {
         font-size: 1.5rem;
