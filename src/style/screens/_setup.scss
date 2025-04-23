@@ -26,16 +26,22 @@
     gap: 1rem;
 
     @include breakpoint("desktop") {
-      display: grid;
-      grid-template-rows: 3rem 25vh auto;
-      justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
     }
 
     &[data-active="false"] {
       display: none;
       @include breakpoint("desktop") {
-        display: grid;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
       }
+    }
+
+    h2 {
+      font-size: 5vh;
     }
   }
 

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ScoreBordaText } from "../components"
+import { Accordian, ScoreBordaText } from "../components"
 import TagInput from "../components/TagInput"
 import { Candidate, Feature } from "../state/BordaEntities"
 import { BordaAction } from "../state/BordaReducer"
@@ -17,8 +17,10 @@ type EntitySetupSectionProps = {
 function EntitySetupSection(props: EntitySetupSectionProps) {
   return (
     <section className="setup" id={props.id} data-active={props.isActive}>
-      <h3>{props.title}</h3>
-      <p>{props.children}</p>
+      <h2>{props.title}</h2>
+      <Accordian title={`What are ${props.title}?`}>
+        <p>{props.children}</p>
+      </Accordian>
       <TagInput
         name={`Add ${props.title}...`}
         values={props.values}
