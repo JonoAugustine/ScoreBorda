@@ -44,6 +44,13 @@
         text-decoration: line-through;
         color: red;
       }
+
+      &:hover,
+      &:active {
+        background-color: transparent;
+        transform: none;
+        box-shadow: none;
+      }
     }
   }
 }
