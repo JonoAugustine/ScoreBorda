@@ -3,8 +3,6 @@
 import { EntitySetup, FeatureCalibration } from "@/Screens"
 import { Borda, BordaStage } from "@/state/Borda"
 import { BordaCtx, BordaDispatchCtx } from "@/state/BordaContext"
-import { Feature } from "@/state/BordaEntities"
-import { BordaIterable } from "@/state/BordaIterable"
 import { BordaAction } from "@/state/BordaReducer"
 import { Dispatch, useContext, useEffect } from "react"
 

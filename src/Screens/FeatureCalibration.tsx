@@ -60,8 +60,11 @@ export default function FeatureCalibration({
   // TODO hide buttons when no more pairs
   return (
     <div className="screen calibration">
-      <h1>Feature Calibration</h1>
-      <p>Click which feature is more important to you</p>
+      <header>
+        <h1>Feature Calibration</h1>
+        <p>Click which feature is more important to you.</p>
+        <p>Go with your first instinct.</p>
+      </header>
       <section className="calibration-buttons">
         <button onClick={addToLeft}>{left.name}</button>
         <button onClick={addToRight}>{right.name}</button>

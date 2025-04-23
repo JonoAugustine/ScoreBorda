@@ -17,7 +17,9 @@ export default function Accordian({ title, children }: AccordianProps) {
         <p>{title}</p>
         {open ? <HiMiniBarsArrowUp /> : <HiMiniBarsArrowDown />}
       </header>
-      <div className="content" data-open={open}>{children}</div>
+      <div className="content" data-open={open}>
+        {children}
+      </div>
     </div>
   )
 }
