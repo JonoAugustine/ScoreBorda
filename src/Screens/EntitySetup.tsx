@@ -65,7 +65,7 @@ export default function EntitySetup({
           }
         >
           <span className="italic">Features</span> help <ScoreBordaText />{" "}
-          understand what's most important to you. They can be anything from
+          understand what{"'"}s most important to you. They can be anything from
           colors to presidential endorsments.
         </EntitySetupSection>
         <EntitySetupSection

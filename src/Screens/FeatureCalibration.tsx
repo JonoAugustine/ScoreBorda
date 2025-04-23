@@ -11,6 +11,7 @@ type FeatureCalibrationProps = {
 }
 
 export default function FeatureCalibration({
+  // TODO refactor restart
   restart,
   cancel,
   iterable,
