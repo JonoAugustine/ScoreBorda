@@ -1,10 +1,14 @@
 @use "../variables" as *;
 
 footer.page-footer {
+  width: 100%;
   position: fixed;
   bottom: 0;
-  
-  padding: 1rem 0 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  padding: 1rem 1rem 0.5rem 1rem;
 
   a {
     color: $c-text;
@@ -20,6 +24,21 @@ footer.page-footer {
     &:hover::after {
       font-weight: bold;
       color: $c-main;
+    }
+  }
+
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+
+    h1 {
+      font-size: 3vh;
+
+      &:last-child {
+        color: $c-main;
+      }
     }
   }
 }

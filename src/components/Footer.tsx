@@ -8,6 +8,10 @@ export default function Footer() {
       >
         {""}
       </a>
+      <header>
+        <h1>Score</h1>
+        <h1>Borda</h1>
+      </header>
     </footer>
   )
 }
