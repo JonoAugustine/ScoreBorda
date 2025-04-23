@@ -1,5 +1,11 @@
 @mixin screen {
-  // This is a placeholder for the screen class
+  margin-top: 2vh;
+  width: 100%;
+
+  h2 {
+    font-size: 5vh;
+  }
+
   h3 {
     font-size: 2rem;
   }

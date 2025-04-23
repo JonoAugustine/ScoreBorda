@@ -61,7 +61,7 @@ export default function FeatureCalibration({
   return (
     <div className="screen calibration">
       <header>
-        <h1>Feature Calibration</h1>
+        <h2>Feature Calibration</h2>
         <p>Click which feature is more important to you.</p>
         <p>Go with your first instinct.</p>
       </header>
@@ -71,18 +71,18 @@ export default function FeatureCalibration({
       </section>
       <div className="progress-buttons">
         <button
-          onClick={restart}
-          style={{ alignSelf: "flex-start" }}
-          className="invert"
-        >
-          Restart Calibration
-        </button>
-        <button
           onClick={cancel}
           style={{ alignSelf: "flex-start" }}
           className="invert"
         >
           Back to Setup
+        </button>
+        <button
+          onClick={restart}
+          style={{ alignSelf: "flex-start" }}
+          className="invert"
+        >
+          Restart Calibration
         </button>
       </div>
     </div>

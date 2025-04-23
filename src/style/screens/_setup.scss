@@ -5,7 +5,6 @@
 .screen.entity-setup {
   @include screen;
 
-  margin-top: 2vh;
   display: grid;
   grid-template-rows: 1fr auto;
   gap: 2rem;
