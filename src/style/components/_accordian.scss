@@ -1,0 +1,31 @@
+@use "../variables" as *;
+
+.accordian {
+  width: fit-content;
+  margin: 5px 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+  }
+
+  .content {
+    max-height: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid $c-accent;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+
+    &[data-open="true"] {
+      padding: 10px 0 10px 0;
+      max-height: 500px; // Arbitrary large number to allow for content expansion
+      overflow: visible;
+    }
+  }
+}
