@@ -18,7 +18,7 @@ export default function BordaPage() {
 }
 
 /** Renders the appropriate borda screen based on the state. */
-function ScreenController(borda: Borda, dispatch: React.Dispatch<any>) {
+function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
   const confirm = () => dispatch({ type: "NEXT_STATE" })
   const back = () => dispatch({ type: "LAST_STATE" })
   const reset = () => dispatch({ type: "RESET" })
@@ -48,24 +48,7 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<any>) {
         <EntitySetup
           features={borda.features}
           candidates={borda.candidates}
-          addFeature={(name) =>
-            dispatch({
-              type: "ADD_FEATURE",
-              payload: { name, score: 0 },
-            })
-          }
-          removeFeature={(name) =>
-            dispatch({ type: "REMOVE_FEATURE", payload: { name } })
-          }
-          addCandidate={(name) =>
-            dispatch({
-              type: "ADD_CANDIDATE",
-              payload: { name, features: [], score: 0 },
-            })
-          }
-          removeCandidate={(name) =>
-            dispatch({ type: "REMOVE_CANDIDATE", payload: { name } })
-          }
+          dispatch={dispatch}
           confirm={confirm}
         />
       )

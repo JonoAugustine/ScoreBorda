@@ -1,16 +1,8 @@
 import { useState } from "react"
+import { ScoreBordaText } from "../components"
 import TagInput from "../components/TagInput"
 import { Candidate, Feature } from "../state/BordaEntities"
-
-type EntitySetupProps = {
-  features: Feature[]
-  candidates: Candidate[]
-  addFeature: (name: string) => void
-  removeFeature: (name: string) => void
-  addCandidate: (name: string) => void
-  removeCandidate: (name: string) => void
-  confirm: () => void
-}
+import { BordaAction } from "../state/BordaReducer"
 
 type EntitySetupSectionProps = {
   title: string
@@ -22,69 +14,76 @@ type EntitySetupSectionProps = {
   children: React.ReactNode
 }
 
-function EntitySetupSection({
-  title,
-  values,
-  add,
-  remove,
-  isActive,
-  id,
-  children,
-}: EntitySetupSectionProps) {
+function EntitySetupSection(props: EntitySetupSectionProps) {
   return (
-    <section className="setup" id={id} data-active={isActive}>
-      <h3>{title}</h3>
-      <p>{children}</p>
+    <section className="setup" id={props.id} data-active={props.isActive}>
+      <h3>{props.title}</h3>
+      <p>{props.children}</p>
       <TagInput
-        name={`Add ${title}...`}
-        values={values}
-        add={add}
-        remove={remove}
+        name={`Add ${props.title}...`}
+        values={props.values}
+        add={props.add}
+        remove={props.remove}
       />
     </section>
   )
 }
 
-export default function EntitySetup(props: EntitySetupProps) {
-  const {
-    features,
-    candidates,
-    addFeature,
-    removeFeature,
-    addCandidate,
-    removeCandidate,
-    confirm,
-  } = props
+type EntitySetupProps = {
+  features: Feature[]
+  candidates: Candidate[]
+  dispatch: React.Dispatch<BordaAction>
+  confirm: () => void
+}
 
+export default function EntitySetup({
+  features,
+  candidates,
+  dispatch,
+  confirm,
+}: EntitySetupProps) {
   const [view, setView] = useState<"features" | "candidates">("features")
 
   return (
     <div className="screen entity-setup">
       <section className="setup-container">
         <EntitySetupSection
+          id="feature-setup"
           title="Features"
           isActive={view === "features"}
           values={features.map((e) => e.name)}
-          add={addFeature}
-          remove={removeFeature}
-          id="feature-setup"
+          add={(name) =>
+            dispatch({
+              type: "ADD_FEATURE",
+              payload: { name, score: 0 },
+            })
+          }
+          remove={(name) =>
+            dispatch({ type: "REMOVE_FEATURE", payload: { name } })
+          }
         >
-          Features help SB understand what is most important to you. They can be
-          anything from red to votes for president of space to likes kittens; as
-          long as it describes some aspect of a candidate, it is a valid
-          feature.
+          <span className="italic">Features</span> help <ScoreBordaText />{" "}
+          understand what's most important to you. They can be anything from
+          colors to presidential endorsments.
         </EntitySetupSection>
         <EntitySetupSection
+          id="candidate-setup"
           title="Candidates"
           isActive={view === "candidates"}
           values={candidates.map((e) => e.name)}
-          add={addCandidate}
-          remove={removeCandidate}
-          id="candidate-setup"
+          add={(name) =>
+            dispatch({
+              type: "ADD_CANDIDATE",
+              payload: { name, features: [], score: 0 },
+            })
+          }
+          remove={(name) =>
+            dispatch({ type: "REMOVE_CANDIDATE", payload: { name } })
+          }
         >
-          Whether people, clothes, insurance plans, or quite literally anything
-          else. SB works to aid you in understanding how you feel about these
-          candidates.
+          People, clothes, insurance plans, or quite literally anything else.{" "}
+          <ScoreBordaText /> works to aid you in understanding how you feel
+          about these <span className="italic">Candidates</span>.
         </EntitySetupSection>
       </section>
       <div className="progress-buttons">
@@ -103,7 +102,7 @@ export default function EntitySetup(props: EntitySetupProps) {
           disabled={features.length < 2 || candidates.length < 2}
           onClick={confirm}
         >
-          Confirm
+          Go To Calibration
         </button>
       </div>
     </div>
