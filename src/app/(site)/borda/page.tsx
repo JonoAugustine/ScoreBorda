@@ -34,8 +34,25 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
           }}
         />
       )
-    // TODO case BordaState.SCORING:
-    // TODO case BordaState.COMPLETE:
+    case BordaStage.SCORING:
+      // TODO implement scoring screen
+      return (
+        <div>
+          <h1>Scoring</h1>
+          <p>TODO: Implement scoring screen</p>
+          <button onClick={back}>Back</button>
+          <button onClick={reset}>Reset</button>
+          <button onClick={confirm}>Confirm</button>
+        </div>
+      )
+    case BordaStage.COMPLETE:
+      // TODO implement complete screen
+      return (
+        <div>
+          <h1>Complete</h1>
+          <p>TODO: Implement complete screen</p>
+        </div>
+      )
     case BordaStage.SETUP:
       return (
         <EntitySetup
