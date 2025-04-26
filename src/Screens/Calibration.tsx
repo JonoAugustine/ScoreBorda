@@ -12,7 +12,7 @@ type FeatureCalibrationProps = {
   dispatch: React.Dispatch<BordaAction<FeatureAction | StageAction>>
 }
 
-export default function FeatureCalibration({
+export default function Calibration({
   features,
   dispatch,
 }: FeatureCalibrationProps) {

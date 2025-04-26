@@ -1,6 +1,6 @@
 "use client"
 
-import { EntitySetup, FeatureCalibration } from "@/Screens"
+import { EntitySetup, Calibration } from "@/Screens"
 import {
   Borda,
   BordaAction,
@@ -25,9 +25,7 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
 
   switch (borda.stage) {
     case BordaStage.CALIBRATION:
-      return (
-        <FeatureCalibration features={borda.features} dispatch={dispatch} />
-      )
+      return <Calibration features={borda.features} dispatch={dispatch} />
     case BordaStage.SCORING:
       // TODO implement scoring screen
       return (

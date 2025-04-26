@@ -1,3 +1,3 @@
 // Screens
-export { default as FeatureCalibration } from "./FeatureCalibration"
+export { default as Calibration } from "./Calibration"
 export { default as EntitySetup } from "./EntitySetup"
