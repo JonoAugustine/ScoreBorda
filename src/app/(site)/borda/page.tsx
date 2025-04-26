@@ -63,7 +63,6 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
           features={borda.features}
           candidates={borda.candidates}
           dispatch={dispatch}
-          confirm={confirm}
         />
       )
     default:

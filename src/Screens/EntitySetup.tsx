@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Accordian, ScoreBordaText, TagInput } from "../components"
-import { Candidate, Feature, BordaAction } from "../state"
+import { BordaAction, Candidate, Feature } from "../state"
 
 type EntitySetupSectionProps = {
   title: string
@@ -33,14 +33,12 @@ type EntitySetupProps = {
   features: Feature[]
   candidates: Candidate[]
   dispatch: React.Dispatch<BordaAction>
-  confirm: () => void
 }
 
 export default function EntitySetup({
   features,
   candidates,
   dispatch,
-  confirm,
 }: EntitySetupProps) {
   const [view, setView] = useState<"features" | "candidates">("features")
 
@@ -100,7 +98,7 @@ export default function EntitySetup({
           hidden={features.length < 2 || candidates.length < 2}
           id="confirm"
           disabled={features.length < 2 || candidates.length < 2}
-          onClick={confirm}
+          onClick={() => dispatch({ type: "NEXT_STATE" })}
         >
           Go To Calibration
         </button>
