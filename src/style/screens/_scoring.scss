@@ -3,14 +3,17 @@
 @use "../mixins";
 @use "../variables";
 
-.screen.calibration {
+.screen.scoring {
   @include screen;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 10vh;
   min-height: 60vh;
+
+  header h2 {
+    margin-bottom: 10px;
+  }
 
   .progress-buttons {
     margin-top: 20px;

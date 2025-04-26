@@ -5,7 +5,7 @@ import BordaProvider from "@/state/BordaContext"
 import { useState } from "react"
 
 export default function BordaLayout(props: any) {
-  const [borda] = useState<Borda>(testBorda())
+  const [borda] = useState<Borda>(testBorda(3))
 
   return (
     <BordaProvider borda={borda}>

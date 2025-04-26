@@ -1,8 +1,8 @@
 export type FeatureAction =
   | "FEATURE_NEW"
   | "FEATURE_REMOVE"
-  | "FEATURE_SCORE_UP"
-  | "FEATURE_SCORE_CLEAR_ALL"
+  | "FEATURE_WEIGHT_UP"
+  | "FEATURE_WEIGHT_CLEAR_ALL"
 
 export type CandidateAction =
   | "CANDIDATE_NEW"

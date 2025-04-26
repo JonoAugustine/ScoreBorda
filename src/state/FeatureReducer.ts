@@ -18,21 +18,21 @@ export default function featureReducer(
           (feature) => feature.name !== action.payload
         ),
       }
-    case "FEATURE_SCORE_UP":
+    case "FEATURE_WEIGHT_UP":
       return {
         ...borda,
         features: borda.features.map((feature) =>
           feature.name === action.payload.name
-            ? { ...feature, score: feature.score + action.payload.value }
+            ? { ...feature, weight: feature.weight + action.payload.value }
             : feature
         ),
       }
-    case "FEATURE_SCORE_CLEAR_ALL":
+    case "FEATURE_WEIGHT_CLEAR_ALL":
       return {
         ...borda,
         features: borda.features.map((feature) => ({
           ...feature,
-          score: 0,
+          weight: 0,
         })),
       }
     default:

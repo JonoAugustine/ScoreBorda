@@ -1,0 +1,16 @@
+// TODO make buttons smaller and side-by-side on large screens
+.screen .calibration-buttons {
+  margin-top: 2vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 50px;
+
+  button {
+    font-size: 5vh;
+    min-width: fit-content;
+    height: fit-content;
+    padding: 10px inherit;
+    width: 30%;
+  }
+}

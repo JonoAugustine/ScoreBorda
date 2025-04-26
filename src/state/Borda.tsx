@@ -31,11 +31,10 @@ export function testBorda(size: number = 5): Borda {
     stage: BordaStage.SETUP,
     features: zeroArray.map((_, i) => ({
       name: `Feature ${i}`,
-      score: 0,
+      weight: 0,
     })),
     candidates: zeroArray.map((_, i) => ({
       name: `Candidate ${i}`,
-      featureScores: zeroArray,
       score: 0,
     })),
   }

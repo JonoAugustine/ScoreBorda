@@ -53,7 +53,7 @@ export default function EntitySetup({
           add={(name) =>
             dispatch({
               type: "FEATURE_NEW",
-              payload: { name, score: 0 },
+              payload: { name, weight: 0 },
             })
           }
           remove={(name) => dispatch({ type: "FEATURE_REMOVE", payload: name })}
@@ -70,7 +70,7 @@ export default function EntitySetup({
           add={(name) =>
             dispatch({
               type: "CANDIDATE_NEW",
-              payload: { name, features: [], score: 0 },
+              payload: { name, score: 0 },
             })
           }
           remove={(name) =>

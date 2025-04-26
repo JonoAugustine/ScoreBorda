@@ -1,6 +1,6 @@
 "use client"
 
-import { EntitySetup, Calibration } from "@/Screens"
+import { Calibration, EntitySetup, Scoring } from "@/Screens"
 import {
   Borda,
   BordaAction,
@@ -29,14 +29,11 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
     case BordaStage.SCORING:
       // TODO implement scoring screen
       return (
-        <div>
-          <h1>Scoring</h1>
-          <p>TODO: Implement scoring screen</p>
-          <button onClick={back}>Back</button>
-          <button onClick={() => dispatch({ type: "STAGE_FIRST_WITH_RESET" })}>
-            Feature & Candidate Setup
-          </button>
-        </div>
+        <Scoring
+          features={borda.features}
+          candidates={borda.candidates}
+          dispatch={dispatch}
+        />
       )
     case BordaStage.COMPLETE:
       // TODO implement complete screen

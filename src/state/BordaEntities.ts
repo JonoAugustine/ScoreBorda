@@ -1,6 +1,5 @@
 export type BordaEntity = {
   name: string
-  score: number
 }
 
 /**
@@ -9,15 +8,18 @@ export type BordaEntity = {
  * to "*likes kittens*"; as long as it describes some aspect of a candidate,
  * it's a valid feature.
  */
-export type Feature = BordaEntity
+export type Feature = BordaEntity & { weight: number }
 
 /**
  * Whether people, clothes, insurance plans, or quite literally anything else.
  * SB's purpose is to aid you in understanding how you feel about about these
  * candidates. Candidates consist of a name, score, and set of features.
  */
-export type Candidate = BordaEntity & { featureScores: number[] }
+export type Candidate = BordaEntity & {
+  score: number
+  featureScores?: number[]
+}
 
 export function scoreOf(candidate: Candidate): number {
-  return candidate.featureScores.reduce((sum, ftr) => sum + ftr, 0)
+  return candidate.featureScores!.reduce((sum, ftr) => sum + ftr, 0)
 }

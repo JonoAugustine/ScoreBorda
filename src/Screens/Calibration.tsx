@@ -38,19 +38,19 @@ export default function Calibration({
     }
   }
 
-  const increaseFeatureScore = (name: string, value: number) =>
+  const featureWeightUp = (name: string, value: number) =>
     dispatch({
-      type: "FEATURE_SCORE_UP",
+      type: "FEATURE_WEIGHT_UP",
       payload: { name, value },
     })
 
   const addToLeft = () => {
-    increaseFeatureScore(left.name, 1)
+    featureWeightUp(left.name, 1)
     nextPair()
   }
 
   const addToRight = () => {
-    increaseFeatureScore(right.name, 1)
+    featureWeightUp(right.name, 1)
     nextPair()
   }
 
@@ -61,7 +61,7 @@ export default function Calibration({
   }
 
   const backToSetup = () => {
-    dispatch({ type: "FEATURE_SCORE_CLEAR_ALL" })
+    dispatch({ type: "FEATURE_WEIGHT_CLEAR_ALL" })
     dispatch({ type: "STAGE_BACK" })
   }
 
@@ -71,7 +71,7 @@ export default function Calibration({
       <header>
         <h2>Feature Calibration</h2>
         <p>Click which feature is more important to you.</p>
-        <p>Go with your first instinct.</p>
+        <p className="underline">Go with your first instinct.</p>
       </header>
       <section className="calibration-buttons">
         <button onClick={addToLeft}>{left.name}</button>
