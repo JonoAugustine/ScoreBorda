@@ -7,8 +7,9 @@ export default function Home() {
       <header>
         <h1>
           The <span className="highlight-ultimate">Ultimate</span> Decision
-          Making Tool for the{" "}
-          <span className="highlight-troubled">Troubled Mind</span>
+          Making Tool for the
+          <br />
+          <span className="highlight-troubled">{"\nTroubled Mind"}</span>
         </h1>
         <div className="divisor">{""}</div>
       </header>

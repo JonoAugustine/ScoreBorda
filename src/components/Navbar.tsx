@@ -4,7 +4,9 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <header>
-        <h1>{""}</h1>
+        <Link href="/">
+          <h1>{""}</h1>
+        </Link>
       </header>
       <ul className="nav-links">
         <li>
