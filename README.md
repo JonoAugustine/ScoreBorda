@@ -1,11 +1,12 @@
-# ScoreBorda 4
+<img src="public/scoreborda.png" alt="ScoreBorda Logo" width="160" />
+
+# ScoreBorda 5
 
 The ultimate decision making tool for the troubled mind
 
-----------------
-----------------
+[View ScoreBorda v5](https://score-borda.vercel.app/)
 
-[View It Live](https://score-borda.vercel.app/)
+[See the Previous Version](https://gitlab.com/JonoAugustine/ScoreBorda)
 
 ## Definitions
 
@@ -30,7 +31,7 @@ the Borda is able to remove much of the overwhelming and confusing aspects of co
 
 ## Running Locally
 
-SB4 is built using NextJS, just install and run to get a local server up:
+SB5 is built using NextJS, just install and run to get a local server up:
 
 ```bash
 pnpm install
