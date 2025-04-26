@@ -84,7 +84,7 @@ export default function Calibration({
         <button
           onClick={backToSetup}
           style={{ alignSelf: "flex-start" }}
-          className="invert"
+          className="warn"
         >
           Back to Setup
         </button>
