@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   BordaAction,
   BordaIterable,
@@ -21,6 +21,12 @@ export default function Calibration({
   )
   const [left, setLeft] = useState<Feature>(iterable.currentPair[0])
   const [right, setRight] = useState<Feature>(iterable.currentPair[1])
+
+  useEffect(() => {
+    dispatch({ type: "FEATURE_WEIGHT_CLEAR_ALL" })
+    setLeft(iterable.currentPair[0])
+    setRight(iterable.currentPair[1])
+  }, [iterable])
 
   const nextPair = () => {
     if (iterable.hasNext) {
@@ -56,8 +62,6 @@ export default function Calibration({
 
   const restart = () => {
     setIterable(new BordaIterable<Feature>(features, true))
-    setLeft(iterable.currentPair[0])
-    setRight(iterable.currentPair[1])
   }
 
   const backToSetup = () => {
