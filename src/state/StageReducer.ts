@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid"
 import { BordaStage, type Borda } from "./Borda"
 import { BordaAction, StageAction } from "./BordaAction"
 
@@ -21,6 +22,20 @@ export default function stageReducer(
         ...borda,
         features: [],
         candidates: [],
+        stage: BordaStage.SETUP,
+      }
+    case "STAGE_FIRST_WITHOUT_RESET":
+      const _id = nanoid()
+      return {
+        ...borda,
+        _id,
+        name: `Borda ${_id}`,
+        features: borda.features.map((f) => ({ ...f, weight: 0 })),
+        candidates: borda.candidates.map((c) => ({
+          ...c,
+          featureScores: undefined,
+          score: 0,
+        })),
         stage: BordaStage.SETUP,
       }
     default:

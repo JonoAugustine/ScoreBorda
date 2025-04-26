@@ -9,7 +9,11 @@ export type CandidateAction =
   | "CANDIDATE_REMOVE"
   | "CANDIDATE_FEATURE_SCORE_UP"
 
-export type StageAction = "STAGE_NEXT" | "STAGE_BACK" | "STAGE_FIRST_WITH_RESET"
+export type StageAction =
+  | "STAGE_NEXT"
+  | "STAGE_BACK"
+  | "STAGE_FIRST_WITH_RESET"
+  | "STAGE_FIRST_WITHOUT_RESET"
 
 export type BordaActionType = FeatureAction | CandidateAction | StageAction
 

@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 *,
 *::after,
@@ -44,4 +45,10 @@ p {
 
 .underline {
   text-decoration: underline;
+}
+
+.hide-mobile {
+  @include breakpoint(phone-lg, max) {
+    display: none !important;
+  }
 }

@@ -17,7 +17,10 @@ export type Borda = {
   stage: BordaStage
 }
 
-export function testBorda(size: number = 5): Borda {
+export function testBorda(
+  size: number = 5,
+  stage: BordaStage = BordaStage.SETUP
+): Borda {
   "use client"
   const zeroArray = [0]
   while (zeroArray.length < size) {
@@ -28,7 +31,7 @@ export function testBorda(size: number = 5): Borda {
     _id,
     date: new Date(),
     name: `Test Borda ${_id}`,
-    stage: BordaStage.SETUP,
+    stage,
     features: zeroArray.map((_, i) => ({
       name: `Feature ${i}`,
       weight: 0,

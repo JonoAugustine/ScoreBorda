@@ -1,6 +1,6 @@
 "use client"
 
-import { Calibration, EntitySetup, Scoring } from "@/Screens"
+import { Calibration, Complete, EntitySetup, Scoring } from "@/Screens"
 import {
   Borda,
   BordaAction,
@@ -16,7 +16,14 @@ export default function BordaPage() {
 
   useEffect(() => console.log(borda), [borda])
 
-  return ScreenController(borda, dispatch)
+  return (
+    <div className="page borda">
+      <header className="borda-header">
+        <h1>{borda.name}</h1>
+      </header>
+      {ScreenController(borda, dispatch)}
+    </div>
+  )
 }
 
 /** Renders the appropriate borda screen based on the state. */
@@ -27,7 +34,6 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
     case BordaStage.CALIBRATION:
       return <Calibration features={borda.features} dispatch={dispatch} />
     case BordaStage.SCORING:
-      // TODO implement scoring screen
       return (
         <Scoring
           features={borda.features}
@@ -36,13 +42,7 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
         />
       )
     case BordaStage.COMPLETE:
-      // TODO implement complete screen
-      return (
-        <div>
-          <h1>Complete</h1>
-          <p>TODO: Implement complete screen</p>
-        </div>
-      )
+      return <Complete borda={borda} dispatch={dispatch} />
     case BordaStage.SETUP:
       return (
         <EntitySetup

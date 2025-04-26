@@ -1,0 +1,81 @@
+@use "screen" as *;
+@use "../mixins" as *;
+@use "../variables" as *;
+
+.screen.complete {
+  @include screen;
+
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+
+  .results {
+    position: relative;
+    max-height: 25vh;
+    overflow-y: scroll;
+    width: 80%;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    background-color: $c-bg-dark;
+    border-radius: 10px;
+    box-shadow: 0 0 10px $shadow;
+
+    @include breakpoint(tablet) {
+      max-height: 50vh;
+    }
+
+    h3 {
+      font-size: 4vh;
+    }
+
+    table {
+      width: 100%;
+      min-width: fit-content;
+      font-size: 2.5vh;
+      text-align: center;
+      border-collapse: collapse; // this doesnt make the header border vanish entirely for some reason
+      border: transparent;
+      border-bottom: 5px solid black;
+
+      @include breakpoint(tablet) {
+        max-width: 600px;
+      }
+
+      th {
+        position: sticky;
+        top: -16px;
+        background-color: $c-bg-dark;
+
+        box-shadow: inset 0 -2px 0 $c-main;
+      }
+
+      th,
+      td {
+        max-width: 300px;
+        overflow-x: hidden;
+        text-overflow: ellipsis; // might not be the best solution
+        white-space: nowrap;
+        padding: 5px 10px 5px 0;
+      }
+
+      tr:nth-of-type(2n + 1) {
+        background-color: $c-bg;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+    gap: 15px;
+  }
+}

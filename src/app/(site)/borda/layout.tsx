@@ -5,16 +5,9 @@ import BordaProvider from "@/state/BordaContext"
 import { useState } from "react"
 
 export default function BordaLayout(props: any) {
-  const [borda] = useState<Borda>(testBorda(3))
-
-  return (
-    <BordaProvider borda={borda}>
-      <div className="page borda">
-        <header className="borda-header">
-          <h1>{borda.name}</h1>
-        </header>
-        {props.children}
-      </div>
-    </BordaProvider>
+  const [borda] = useState<Borda | undefined>(
+    process.env.NODE_ENV === "development" ? testBorda(4) : undefined
   )
+
+  return <BordaProvider borda={borda}>{props.children}</BordaProvider>
 }
