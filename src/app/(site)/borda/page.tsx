@@ -1,9 +1,13 @@
 "use client"
 
 import { EntitySetup, FeatureCalibration } from "@/Screens"
-import { Borda, BordaStage } from "@/state/Borda"
-import { BordaCtx, BordaDispatchCtx } from "@/state/BordaContext"
-import { BordaAction } from "@/state/BordaReducer"
+import {
+  Borda,
+  BordaAction,
+  BordaCtx,
+  BordaDispatchCtx,
+  BordaStage,
+} from "@/state"
 import { Dispatch, useContext, useEffect } from "react"
 
 export default function BordaPage() {

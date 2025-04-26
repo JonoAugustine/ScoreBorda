@@ -1,7 +1,5 @@
 import { useState } from "react"
-import { Feature } from "../state/BordaEntities"
-import { BordaIterable } from "../state/BordaIterable"
-import { BordaAction } from "../state/BordaReducer"
+import { BordaAction, Feature, BordaIterable } from "../state"
 
 type FeatureCalibrationProps = {
   features: Feature[]

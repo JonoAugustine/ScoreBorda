@@ -1,8 +1,6 @@
 import { useState } from "react"
-import { Accordian, ScoreBordaText } from "../components"
-import TagInput from "../components/TagInput"
-import { Candidate, Feature } from "../state/BordaEntities"
-import { BordaAction } from "../state/BordaReducer"
+import { Accordian, ScoreBordaText, TagInput } from "../components"
+import { Candidate, Feature, BordaAction } from "../state"
 
 type EntitySetupSectionProps = {
   title: string
