@@ -65,7 +65,6 @@ export default function Calibration({
     dispatch({ type: "STAGE_BACK" })
   }
 
-  // TODO hide buttons when no more pairs
   return (
     <div className="screen calibration">
       <header>

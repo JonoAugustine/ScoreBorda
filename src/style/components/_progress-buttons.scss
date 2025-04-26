@@ -1,0 +1,11 @@
+.progress-buttons {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  button {
+    font-size: 1.3rem;
+  }
+}

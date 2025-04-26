@@ -1,8 +1,6 @@
 @use "../variables" as *;
 @use "../mixins" as *;
 
-// TODO Extract page stylings
-
 @mixin page {
   width: 100%;
   padding: 1rem 5%;
@@ -16,6 +14,7 @@
   }
 
   &.history {
+    // TODO extract to history page when created
     header {
       margin: auto auto 1rem auto;
     }
