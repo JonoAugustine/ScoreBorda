@@ -52,13 +52,11 @@ export default function EntitySetup({
           values={features.map((e) => e.name)}
           add={(name) =>
             dispatch({
-              type: "ADD_FEATURE",
+              type: "FEATURE_NEW",
               payload: { name, score: 0 },
             })
           }
-          remove={(name) =>
-            dispatch({ type: "REMOVE_FEATURE", payload: { name } })
-          }
+          remove={(name) => dispatch({ type: "FEATURE_REMOVE", payload: name })}
         >
           <span className="italic">Features</span> help <ScoreBordaText />{" "}
           understand what{"'"}s most important to you. They can be anything from
@@ -71,12 +69,12 @@ export default function EntitySetup({
           values={candidates.map((e) => e.name)}
           add={(name) =>
             dispatch({
-              type: "ADD_CANDIDATE",
+              type: "CANDIDATE_NEW",
               payload: { name, features: [], score: 0 },
             })
           }
           remove={(name) =>
-            dispatch({ type: "REMOVE_CANDIDATE", payload: { name } })
+            dispatch({ type: "CANDIDATE_REMOVE", payload: name })
           }
         >
           People, clothes, insurance plans, or quite literally anything else.{" "}
@@ -98,7 +96,7 @@ export default function EntitySetup({
           hidden={features.length < 2 || candidates.length < 2}
           id="confirm"
           disabled={features.length < 2 || candidates.length < 2}
-          onClick={() => dispatch({ type: "NEXT_STATE" })}
+          onClick={() => dispatch({ type: "STAGE_NEXT" })}
         >
           Go To Calibration
         </button>

@@ -1,7 +1,8 @@
 import { nanoid } from "nanoid"
 import { createContext, PropsWithChildren, useReducer } from "react"
 import { Borda, BordaStage } from "./Borda"
-import bordaReducer, { BordaAction } from "./BordaReducer"
+import bordaReducer from "./BordaReducer"
+import { BordaAction } from "./BordaAction"
 
 export const BordaCtx = createContext<Borda | null>(null)
 export const BordaDispatchCtx =

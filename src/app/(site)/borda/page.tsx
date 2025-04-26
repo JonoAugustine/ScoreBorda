@@ -21,22 +21,12 @@ export default function BordaPage() {
 
 /** Renders the appropriate borda screen based on the state. */
 function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
-  const confirm = () => dispatch({ type: "NEXT_STATE" })
-  const back = () => dispatch({ type: "LAST_STATE" })
-  const reset = () => dispatch({ type: "RESET" })
+  const back = () => dispatch({ type: "STAGE_BACK" })
 
   switch (borda.stage) {
     case BordaStage.CALIBRATION:
       return (
-        <FeatureCalibration
-          features={borda.features}
-          dispatch={dispatch}
-          onComplete={confirm}
-          cancel={back}
-          restart={() => {
-            dispatch({ type: "RESET" })
-          }}
-        />
+        <FeatureCalibration features={borda.features} dispatch={dispatch} />
       )
     case BordaStage.SCORING:
       // TODO implement scoring screen
@@ -45,8 +35,9 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
           <h1>Scoring</h1>
           <p>TODO: Implement scoring screen</p>
           <button onClick={back}>Back</button>
-          <button onClick={reset}>Reset</button>
-          <button onClick={confirm}>Confirm</button>
+          <button onClick={() => dispatch({ type: "STAGE_FIRST_WITH_RESET" })}>
+            Feature & Candidate Setup
+          </button>
         </div>
       )
     case BordaStage.COMPLETE:
@@ -70,7 +61,9 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
         <div>
           <h1>Unknown state: {borda.stage}</h1>
           <button onClick={back}>back</button>
-          <button onClick={reset}>Reset</button>
+          <button onClick={() => dispatch({ type: "STAGE_FIRST_WITH_RESET" })}>
+            Feature & Candidate Setup
+          </button>
         </div>
       )
   }

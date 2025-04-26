@@ -1,23 +1,22 @@
 import { useState } from "react"
-import { BordaAction, Feature, BordaIterable } from "../state"
+import {
+  BordaAction,
+  BordaIterable,
+  Feature,
+  FeatureAction,
+  StageAction,
+} from "../state"
 
 type FeatureCalibrationProps = {
   features: Feature[]
-  dispatch: React.Dispatch<BordaAction>
-  onComplete: () => void
-  cancel: () => void
-  restart: () => void
+  dispatch: React.Dispatch<BordaAction<FeatureAction | StageAction>>
 }
 
 export default function FeatureCalibration({
   features,
-  // TODO refactor restart
-  restart,
-  cancel,
   dispatch,
-  onComplete,
 }: FeatureCalibrationProps) {
-  const [iterable] = useState<BordaIterable<Feature>>(
+  const [iterable, setIterable] = useState<BordaIterable<Feature>>(
     new BordaIterable<Feature>(features, true)
   )
   const [left, setLeft] = useState<Feature>(iterable.currentPair[0])
@@ -29,19 +28,19 @@ export default function FeatureCalibration({
       setLeft(_left)
       setRight(_right)
       console.log(
-        "steps",
+        "total steps",
         iterable.totalSteps,
-        "remaining",
+        "remaining steps",
         iterable.stepsRemaining
       )
     } else {
-      onComplete()
+      dispatch({ type: "STAGE_NEXT" })
     }
   }
 
   const increaseFeatureScore = (name: string, value: number) =>
     dispatch({
-      type: "INCREASE_FEATURE_SCORE",
+      type: "FEATURE_SCORE_UP",
       payload: { name, value },
     })
 
@@ -53,6 +52,17 @@ export default function FeatureCalibration({
   const addToRight = () => {
     increaseFeatureScore(right.name, 1)
     nextPair()
+  }
+
+  const restart = () => {
+    setIterable(new BordaIterable<Feature>(features, true))
+    setLeft(iterable.currentPair[0])
+    setRight(iterable.currentPair[1])
+  }
+
+  const backToSetup = () => {
+    dispatch({ type: "FEATURE_SCORE_CLEAR_ALL" })
+    dispatch({ type: "STAGE_BACK" })
   }
 
   // TODO hide buttons when no more pairs
@@ -69,7 +79,7 @@ export default function FeatureCalibration({
       </section>
       <div className="progress-buttons">
         <button
-          onClick={cancel}
+          onClick={backToSetup}
           style={{ alignSelf: "flex-start" }}
           className="invert"
         >
