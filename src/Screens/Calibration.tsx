@@ -93,7 +93,7 @@ export default function Calibration({
           style={{ alignSelf: "flex-start" }}
           className="invert"
         >
-          Restart Calibration
+          Restart
         </button>
       </div>
     </div>

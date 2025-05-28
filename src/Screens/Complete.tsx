@@ -57,11 +57,9 @@ export default function Complete({ borda, dispatch }: CompleteProps) {
           className="invert"
           onClick={() => dispatch({ type: "STAGE_FIRST_WITH_RESET" })}
         >
-          Start Over With the Same Features & Candidates
+          Start Over With the Same Settings
         </button>
-        <button className="accent">
-          Start Over With New Features & Candidates
-        </button>
+        <button className="accent">Start Over With New Settings</button>
       </div>
     </div>
   )

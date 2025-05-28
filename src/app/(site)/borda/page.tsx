@@ -19,7 +19,7 @@ export default function BordaPage() {
   return (
     <div className="page borda">
       <header className="borda-header">
-        <h1>{borda.name}</h1>
+        <h2>{borda.name}</h2>
       </header>
       {ScreenController(borda, dispatch)}
     </div>
