@@ -18,24 +18,24 @@
     "nanoid": "^5.1.5",
     "next": "15.2.4",
     "react": "^19.1.0",
-    "react-dom": "^19.0.0",
+    "react-dom": "^19.1.0",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    "@eslint/eslintrc": "^3.3.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^11.0.1",
-    "@types/node": "^20.17.30",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@semantic-release/github": "^11.0.3",
+    "@types/node": "^20.17.51",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
     "conventional-changelog-eslint": "^6.0.0",
-    "eslint": "^9",
+    "eslint": "^9.27.0",
     "eslint-config-next": "15.2.4",
-    "eslint-config-prettier": "^10.1.1",
+    "eslint-config-prettier": "^10.1.5",
     "prettier": "^3.5.3",
-    "sass": "^1.86.3",
-    "semantic-release": "^24.2.3",
-    "typescript": "^5"
+    "sass": "^1.89.0",
+    "semantic-release": "^24.2.5",
+    "typescript": "^5.8.3"
   }
 }

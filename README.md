@@ -46,7 +46,3 @@ pnpm dev
 - Local Data persistance
 - Remote Data persistance
 - Candidate-specific Features
-	- In SB 0.1, and (as of) SB 0.2.72d634d, the inability to compare candidates that do not share
-	  all of their features has been a limitation on the variety of candidates that can be compared.
-	  Expanding how SB understands candidates may be an interesting path to take; specifically,
-	  the ability to calibrate from a single pool of features and have Candidates draw some (*but not necessarily all*) features from that pool.
