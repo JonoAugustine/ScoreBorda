@@ -2,10 +2,10 @@
 @use "../variables" as *;
 
 .page.borda {
-  @include page;
-
   align-items: center;
   justify-content: space-between;
+  
+  @include page;
 
   header.borda-header {
     width: 100%;
