@@ -38,7 +38,7 @@ export default function MalAuthCallback() {
     } else {
       getIDToken()
     }
-  }, [searchParams, verifier, setVerifier, getIDToken])
+  }, [searchParams, verifier, setVerifier])
 
   return <div>Loading...</div>
 }
