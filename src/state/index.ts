@@ -1,6 +1,1 @@
-export * from "./Borda"
-export * from "./BordaContext"
-export * from "./BordaReducer"
-export * from "./BordaEntities"
-export * from "./BordaIterable"
-export * from "./BordaAction"
+export * from "./fcborda"

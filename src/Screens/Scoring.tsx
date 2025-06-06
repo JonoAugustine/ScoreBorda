@@ -8,7 +8,7 @@ import {
   CandidateAction,
   Feature,
   StageAction,
-} from "../state"
+} from "../state/fcborda"
 
 type ScoringProps = {
   candidates: Candidate[]

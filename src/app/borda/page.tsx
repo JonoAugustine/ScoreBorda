@@ -7,7 +7,7 @@ import {
   BordaCtx,
   BordaDispatchCtx,
   BordaStage,
-} from "@/state"
+} from "@/state/fcborda"
 import { Dispatch, useContext, useEffect } from "react"
 
 export default function BordaPage() {

@@ -22,7 +22,11 @@ export default function Home() {
           at once.
         </p>
         <Link className="link-button" href="/borda">
-          Start
+          Classic Borda
+        </Link>
+
+        <Link className="link-button accent" href="/malborda">
+          My Anime List Borda
         </Link>
       </main>
     </div>

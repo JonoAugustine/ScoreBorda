@@ -1,7 +1,7 @@
 "use client"
 
-import { Borda, testBorda } from "@/state/Borda"
-import BordaProvider from "@/state/BordaContext"
+import { Borda, testBorda } from "@/state/fcborda/Borda"
+import BordaProvider from "@/state/fcborda/BordaContext"
 import { useState } from "react"
 
 export default function BordaLayout(props: any) {

@@ -46,3 +46,22 @@ pnpm dev
 - Local Data persistance
 - Remote Data persistance
 - Candidate-specific Features
+
+## MAL Borda
+
+### Auth
+
+```mermaid
+sequenceDiagram
+  actor browser
+  participant server
+  participant mal
+
+  browser->>mal: authorize with code challenge
+  mal->>browser: authorization code
+  browser->>server: code challenge, authorization code
+  mal->>server: authorization code
+  server->>mal: 
+  mal->>server: access & refresh tokens
+  
+```

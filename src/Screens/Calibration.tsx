@@ -5,7 +5,7 @@ import {
   Feature,
   FeatureAction,
   StageAction,
-} from "../state"
+} from "../state/fcborda"
 
 type FeatureCalibrationProps = {
   features: Feature[]
@@ -26,7 +26,7 @@ export default function Calibration({
     dispatch({ type: "FEATURE_WEIGHT_CLEAR_ALL" })
     setLeft(iterable.currentPair[0])
     setRight(iterable.currentPair[1])
-  }, [iterable])
+  }, [iterable, dispatch])
 
   const nextPair = () => {
     if (iterable.hasNext) {
