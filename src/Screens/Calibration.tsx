@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import {
-  BordaAction,
+  FCBordaAction,
   BordaIterable,
   Feature,
   FeatureAction,
@@ -9,7 +9,7 @@ import {
 
 type FeatureCalibrationProps = {
   features: Feature[]
-  dispatch: React.Dispatch<BordaAction<FeatureAction | StageAction>>
+  dispatch: React.Dispatch<FCBordaAction<FeatureAction | StageAction>>
 }
 
 export default function Calibration({

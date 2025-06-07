@@ -1,8 +1,8 @@
-import { Borda, BordaAction, StageAction } from "../state/fcborda"
+import { FCBorda, FCBordaAction, StageAction } from "../state/fcborda"
 
 type CompleteProps = {
-  borda: Borda
-  dispatch: React.Dispatch<BordaAction<StageAction>>
+  borda: FCBorda
+  dispatch: React.Dispatch<FCBordaAction<StageAction>>
 }
 
 // TODO turn start over into a modal

@@ -1,10 +1,10 @@
-import { type Borda } from "./Borda"
-import { BordaAction, CandidateAction } from "./BordaAction"
+import { type FCBorda } from "./FCBorda"
+import { FCBordaAction, CandidateAction } from "./FCBAction"
 
 export default function candidateReducer(
-  borda: Borda,
-  action: BordaAction<CandidateAction>
-): Borda {
+  borda: FCBorda,
+  action: FCBordaAction<CandidateAction>
+): FCBorda {
   switch (action.type) {
     case "CANDIDATE_NEW":
       return {

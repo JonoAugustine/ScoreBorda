@@ -1,10 +1,10 @@
-import { type Borda } from "./Borda"
-import { BordaAction, FeatureAction } from "./BordaAction"
+import { type FCBorda } from "./FCBorda"
+import { FCBordaAction, FeatureAction } from "./FCBAction"
 
 export default function featureReducer(
-  borda: Borda,
-  action: BordaAction<FeatureAction>
-): Borda {
+  borda: FCBorda,
+  action: FCBordaAction<FeatureAction>
+): FCBorda {
   switch (action.type) {
     case "FEATURE_NEW":
       return {

@@ -1,26 +1,23 @@
 import { nanoid } from "nanoid"
-import { Candidate, Feature } from "./BordaEntities"
+import { BaseBorda } from "../types"
+import { Candidate, Feature } from "./FCBEntities"
 
-export const enum BordaStage {
+export const enum FCBordaStage {
   SETUP = 0,
   CALIBRATION = 1,
   SCORING = 2,
   COMPLETE = 3,
 }
 
-export type Borda = {
-  _id: string
-  date?: Date
-  name: string
+export type FCBorda = BaseBorda<FCBordaStage> & {
   features: Feature[]
   candidates: Candidate[]
-  stage: BordaStage
 }
 
-export function testBorda(
+export function testFcBorda(
   size: number = 5,
-  stage: BordaStage = BordaStage.SETUP
-): Borda {
+  stage: FCBordaStage = FCBordaStage.SETUP
+): FCBorda {
   "use client"
   const zeroArray = [0]
   while (zeroArray.length < size) {

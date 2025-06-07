@@ -2,17 +2,17 @@
 
 import { Calibration, Complete, EntitySetup, Scoring } from "@/Screens"
 import {
-  Borda,
-  BordaAction,
-  BordaCtx,
-  BordaDispatchCtx,
-  BordaStage,
+  FCBorda,
+  FCBordaAction,
+  FCBordaCtx,
+  FCBordaDispatchCtx,
+  FCBordaStage,
 } from "@/state/fcborda"
 import { Dispatch, useContext, useEffect } from "react"
 
 export default function BordaPage() {
-  const borda = useContext(BordaCtx)!
-  const dispatch: Dispatch<BordaAction> = useContext(BordaDispatchCtx)!
+  const borda = useContext(FCBordaCtx)!
+  const dispatch: Dispatch<FCBordaAction> = useContext(FCBordaDispatchCtx)!
 
   useEffect(() => console.log(borda), [borda])
 
@@ -27,13 +27,16 @@ export default function BordaPage() {
 }
 
 /** Renders the appropriate borda screen based on the state. */
-function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
+function ScreenController(
+  borda: FCBorda,
+  dispatch: React.Dispatch<FCBordaAction>
+) {
   const back = () => dispatch({ type: "STAGE_BACK" })
 
   switch (borda.stage) {
-    case BordaStage.CALIBRATION:
+    case FCBordaStage.CALIBRATION:
       return <Calibration features={borda.features} dispatch={dispatch} />
-    case BordaStage.SCORING:
+    case FCBordaStage.SCORING:
       return (
         <Scoring
           features={borda.features}
@@ -41,9 +44,9 @@ function ScreenController(borda: Borda, dispatch: React.Dispatch<BordaAction>) {
           dispatch={dispatch}
         />
       )
-    case BordaStage.COMPLETE:
+    case FCBordaStage.COMPLETE:
       return <Complete borda={borda} dispatch={dispatch} />
-    case BordaStage.SETUP:
+    case FCBordaStage.SETUP:
       return (
         <EntitySetup
           features={borda.features}

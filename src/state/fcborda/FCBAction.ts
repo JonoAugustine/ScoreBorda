@@ -15,10 +15,10 @@ export type StageAction =
   | "STAGE_FIRST_WITH_RESET"
   | "STAGE_FIRST_WITHOUT_RESET"
 
-export type BordaActionType = FeatureAction | CandidateAction | StageAction
+export type FCBordaActionType = FeatureAction | CandidateAction | StageAction
 
-export type BordaAction<
-  T extends BordaActionType = BordaActionType,
+export type FCBordaAction<
+  T extends FCBordaActionType = FCBordaActionType,
   P = any,
 > = {
   type: T

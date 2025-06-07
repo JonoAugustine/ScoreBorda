@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid"
-import { BordaStage, type Borda } from "./Borda"
-import { BordaAction, StageAction } from "./BordaAction"
+import { FCBordaStage, type FCBorda } from "./FCBorda"
+import { FCBordaAction, StageAction } from "./FCBAction"
 
 export default function stageReducer(
-  borda: Borda,
-  action: BordaAction<StageAction, undefined>
-): Borda {
+  borda: FCBorda,
+  action: FCBordaAction<StageAction, undefined>
+): FCBorda {
   switch (action.type) {
     case "STAGE_NEXT":
       return {
@@ -22,7 +22,7 @@ export default function stageReducer(
         ...borda,
         features: [],
         candidates: [],
-        stage: BordaStage.SETUP,
+        stage: FCBordaStage.SETUP,
       }
     case "STAGE_FIRST_WITHOUT_RESET":
       const _id = nanoid()
@@ -36,7 +36,7 @@ export default function stageReducer(
           featureScores: undefined,
           score: 0,
         })),
-        stage: BordaStage.SETUP,
+        stage: FCBordaStage.SETUP,
       }
     default:
       throw Error(`Unknown action type: ${action.type}`)

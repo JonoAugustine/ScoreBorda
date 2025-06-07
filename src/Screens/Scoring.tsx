@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   BordaAction,
   BordaIterable,
@@ -45,9 +45,6 @@ export default function Scoring({
       // move to the next feature
       setFeatureIndex(featureIndex + 1)
       setIterable(new BordaIterable<Candidate>(candidates, true))
-      const [_left, _right] = iterable.step()
-      setLeft(_left)
-      setRight(_right)
     }
     console.log(
       "total steps",
@@ -56,6 +53,13 @@ export default function Scoring({
       iterable.stepsRemaining
     )
   }
+
+  /** When the new iterable is set, update l & r */
+  useEffect(() => {
+    const [_left, _right] = iterable.step()
+    setLeft(_left)
+    setRight(_right)
+  }, [iterable, setLeft, setRight])
 
   const featureScoreUp = (name: string, value: number) =>
     dispatch({

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Accordian, ScoreBordaText, TagInput } from "../components"
-import { BordaAction, Candidate, Feature } from "../state/fcborda"
+import { FCBordaAction, Candidate, Feature } from "../state/fcborda"
 
 type EntitySetupSectionProps = {
   title: string
@@ -32,7 +32,7 @@ function EntitySetupSection(props: EntitySetupSectionProps) {
 type EntitySetupProps = {
   features: Feature[]
   candidates: Candidate[]
-  dispatch: React.Dispatch<BordaAction>
+  dispatch: React.Dispatch<FCBordaAction>
 }
 
 export default function EntitySetup({
