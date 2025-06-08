@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react"
 import {
-  BordaAction,
   BordaIterable,
   Candidate,
   CandidateAction,
+  FCBordaAction,
   Feature,
   StageAction,
 } from "../state/fcborda"
@@ -13,7 +13,7 @@ import {
 type ScoringProps = {
   candidates: Candidate[]
   features: Feature[]
-  dispatch: React.Dispatch<BordaAction<CandidateAction | StageAction>>
+  dispatch: React.Dispatch<FCBordaAction<CandidateAction | StageAction>>
 }
 
 // TODO option to have features in random order.
