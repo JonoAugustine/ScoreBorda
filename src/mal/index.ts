@@ -1,3 +1,5 @@
 export * from "./auth"
 export * from "./util"
 export * from "./User"
+export * from "./Page"
+export * from "./Anime"

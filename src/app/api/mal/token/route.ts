@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
     expires: tokens.expires_in,
   })
 
-  cookieStore.set(STORAGE_KEYS.COOKIES.ACCESS_TOKEN, tokens.access_token, {
+  cookieStore.set(STORAGE_KEYS.COOKIES.REFRESH_TOKEN, tokens.refresh_token, {
     httpOnly: true,
     secure: env.environment !== "local",
   })
