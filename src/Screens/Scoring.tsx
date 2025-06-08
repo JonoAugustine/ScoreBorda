@@ -46,7 +46,7 @@ export default function Scoring({
       setFeatureIndex(featureIndex + 1)
       setIterable(new BordaIterable<Candidate>(candidates, true))
     }
-    console.log(
+    console.debug(
       "total steps",
       iterable.totalSteps,
       "remaining steps",

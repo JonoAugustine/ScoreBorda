@@ -13,7 +13,7 @@ export type BordaProviderProps<
   default: BordaType
 }
 
-export default function BordaProvider<
+export function BordaProvider<
   BordaType extends BaseBorda<BordaStage>,
   BordaStage,
   ActionType,

@@ -33,7 +33,7 @@ export default function Calibration({
       const [_left, _right] = iterable.step()
       setLeft(_left)
       setRight(_right)
-      console.log(
+      console.debug(
         "total steps",
         iterable.totalSteps,
         "remaining steps",

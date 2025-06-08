@@ -1,64 +1,41 @@
 "use client"
 
-import {
-  COOKIE_KEYS,
-  generateCodeVerifier,
-  generateMalAuthUrl,
-  MalUser,
-} from "@/mal"
-import { decode, JwtPayload } from "jsonwebtoken"
+import { deleteIdToken, loadUser, MalUser } from "@/mal"
 import Image from "next/image"
-import Link from "next/link"
+import { redirect } from "next/navigation"
 import { useEffect, useState } from "react"
 
 export default function MalBorda() {
-  const [authurl, setAuthUrl] = useState<string | undefined>(undefined)
-  const [userPartial, setUserPartial] = useState<Partial<MalUser> | undefined>(
-    undefined
-  )
+  const [loading, setLoading] = useState(true)
+  const [userPartial, setUserPartial] = useState<Partial<MalUser> | undefined>()
 
-  async function getAuthUrl() {
-    const verifier = generateCodeVerifier()
-    //const challenge = await generateCodeChallenge(verifier)
-    window.localStorage.setItem(COOKIE_KEYS.CODE_VERIFIER, verifier)
-    console.log(
-      verifier,
-      generateMalAuthUrl(verifier, `${location.origin}/malborda/callback`)
-    )
-    setAuthUrl(
-      generateMalAuthUrl(verifier, `${location.origin}/malborda/callback`)
-    )
-  }
-
+  // on window load, check if
   useEffect(() => {
-    const idToken = localStorage[COOKIE_KEYS.ID_TOKEN]
-    if (!idToken) getAuthUrl()
-    else {
-      const decoded = decode(idToken) as JwtPayload
-      console.log(decoded)
-      setUserPartial({
-        id: (decoded?.sub && Number.parseInt(decoded.sub)) || undefined,
-        name: decoded?.name,
-        picture: decoded?.pfp,
-      })
-    }
-  }, [setAuthUrl, setUserPartial])
+    const user = loadUser()
+    if (user) setUserPartial(user)
+    setLoading(false)
+  }, [setUserPartial, setLoading])
+
+  console.debug("user partial", userPartial)
+
+  if (loading) return <p>Loading MAL User...</p>
+
+  if (!userPartial) return redirect(window.location.origin + "/malborda/auth")
 
   return (
-    (userPartial && (
-      <div>
-        {userPartial.picture && (
-          <Image src={userPartial.picture} width={250} height={250} alt="" />
-        )}
-        <p>{userPartial.name}</p>
-      </div>
-    )) ||
-    (authurl && (
-      <div>
-        <Link href={authurl}>
-          <button>Login To My Anime List</button>
-        </Link>
-      </div>
-    )) || <div>Loading...</div>
+    <div>
+      {userPartial.picture && (
+        <Image src={userPartial.picture} width={150} height={150} alt="" />
+      )}
+      <p>{userPartial.name}</p>
+      <button
+        onClick={() => {
+          deleteIdToken()
+          setUserPartial(undefined)
+        }}
+      >
+        Logout
+      </button>
+    </div>
   )
 }

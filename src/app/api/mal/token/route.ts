@@ -1,5 +1,5 @@
 import env from "@/env"
-import { buildMalUrl, COOKIE_KEYS, queryParamBuilder } from "@/mal"
+import { buildMalUrl, queryParamBuilder, STORAGE_KEYS } from "@/mal"
 import { getUser } from "@/mal/backend"
 import { sign } from "jsonwebtoken"
 import { cookies } from "next/headers"
@@ -23,7 +23,6 @@ export async function POST(req: NextRequest) {
 
   // get access token
 
-  // TODO returning 500 and idk why
   const malApiResponse = await fetch(buildMalUrl("oauth2/token", "v1"), {
     method: "POST",
     body: queryParamBuilder({
@@ -39,27 +38,32 @@ export async function POST(req: NextRequest) {
     },
   })
 
-  if (malApiResponse.status > 300) {
-    console.error(malApiResponse)
-    try {
-      console.error(await malApiResponse.json())
-    } catch (error) {
-      console.error(error)
+  if (malApiResponse.status >= 500) {
+    console.log(malApiResponse)
+    if (malApiResponse.headers.get("Content-Type") == "application/json") {
+      console.log(await malApiResponse.json())
     }
-    return NextResponse.json({}, { status: 500 })
-  } else {
-    console.log("mal token gotten")
+    return NextResponse.json("MAL API Error", { status: 529 })
   }
+
+  if (malApiResponse.status >= 400) {
+    if (malApiResponse.headers.get("Content-Type") == "application/json") {
+      console.log(await malApiResponse.json())
+    }
+    return NextResponse.json("Unauthorized", { status: 401 })
+  }
+
+  console.log("successful login")
 
   const tokens: TokenPayload = await malApiResponse.json()
 
-  cookieStore.set(COOKIE_KEYS.ACCESS_TOKEN, tokens.access_token, {
+  cookieStore.set(STORAGE_KEYS.COOKIES.ACCESS_TOKEN, tokens.access_token, {
     httpOnly: true,
     secure: env.environment !== "local",
     expires: tokens.expires_in,
   })
 
-  cookieStore.set(COOKIE_KEYS.ACCESS_TOKEN, tokens.access_token, {
+  cookieStore.set(STORAGE_KEYS.COOKIES.ACCESS_TOKEN, tokens.access_token, {
     httpOnly: true,
     secure: env.environment !== "local",
   })
@@ -67,15 +71,15 @@ export async function POST(req: NextRequest) {
   // generate ID token
   const user = await getUser(tokens.access_token)
 
-  console.log(user)
+  console.log(`uid: ${user.id}`)
 
   const idToken = sign(
-    { sub: user.id, name: user.name, pfp: user.picture },
+    { sub: user.id, name: user.name, picture: user.picture },
     env.jwtSecret,
     { algorithm: "HS256" }
   )
 
-  cookieStore.set(COOKIE_KEYS.ID_TOKEN, idToken, {
+  cookieStore.set(STORAGE_KEYS.LOCAL.ID_TOKEN, idToken, {
     secure: env.environment !== "local",
     httpOnly: false,
   })

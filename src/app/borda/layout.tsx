@@ -1,9 +1,15 @@
 "use client"
 
-import BordaProvider from "@/state/BordaProvider"
-import { FCBordaCtx, FCBordaDispatchCtx, fcBordaReducer } from "@/state/fcborda"
-import { FCBorda, FCBordaStage, testFcBorda } from "@/state/fcborda/FCBorda"
-import { FCBordaAction } from "@/state/fcborda/FCBAction"
+import { BordaProvider } from "@/state"
+import {
+  FCBorda,
+  FCBordaAction,
+  FCBordaCtx,
+  FCBordaDispatchCtx,
+  fcBordaReducer,
+  FCBordaStage,
+  testFcBorda,
+} from "@/state/fcborda"
 import { nanoid } from "nanoid"
 import { useState } from "react"
 

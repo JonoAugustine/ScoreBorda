@@ -8,5 +8,5 @@ export const enum MalBordaStage {
 
 export type MalBorda = BaseBorda<MalBordaStage> & {
   stage: MalBordaStage
-  candidates: any[]
+  anime: any[]
 }
