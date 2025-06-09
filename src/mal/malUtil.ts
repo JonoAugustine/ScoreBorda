@@ -1,3 +1,18 @@
+export const STORAGE_KEYS = Object.freeze({
+  SESSION: {
+    CODE_VERIFIER: "sbCodeChallenge",
+  },
+  LOCAL: {
+    ID_TOKEN: "sbIdToken",
+  },
+  COOKIES: {
+    ACCESS_TOKEN: "sbAccesToken",
+    REFRESH_TOKEN: "sbRefreshToken",
+  },
+})
+
+export type MalApiError = { error?: string; message?: string }
+
 export const malDomain = "myanimelist.net/"
 
 /**

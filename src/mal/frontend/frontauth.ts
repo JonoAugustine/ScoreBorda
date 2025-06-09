@@ -1,22 +1,9 @@
 "client only"
 
 import { decode } from "jsonwebtoken"
-import env from "../env"
-import { MalUser } from "./User"
-import { buildMalUrl } from "./util"
-
-export const STORAGE_KEYS = Object.freeze({
-  SESSION: {
-    CODE_VERIFIER: "sbCodeChallenge",
-  },
-  LOCAL: {
-    ID_TOKEN: "sbIdToken",
-  },
-  COOKIES: {
-    ACCESS_TOKEN: "sbAccesToken",
-    REFRESH_TOKEN: "sbRefreshToken",
-  },
-})
+import env from "../../env"
+import { MalUser } from "../User"
+import { buildMalUrl, STORAGE_KEYS } from "../malUtil"
 
 // GENERATING CODE VERIFIER
 function dec2hex(dec: number) {
@@ -31,14 +18,14 @@ export function generateCodeVerifier(): string {
 
 export function generateMalAuthUrl(
   code_challenge: string,
-  redirect_url?: string
+  redirect_uri?: string
 ): string {
   return buildMalUrl("oauth2/authorize", "v1", {
     client_id: env.mal.clientID,
     response_type: "code",
     code_challenge,
     state: "sb_mal_auth",
-    redirect_url,
+    redirect_uri,
     code_challenge_method: "plain",
   })
 }
@@ -65,18 +52,13 @@ export async function malLogin(
   return response.json()
 }
 
-export function loadUser(): Partial<MalUser> | null {
+/** Load the user from a saved id token */
+export function loadUserFromIdToken(): MalUser | null {
   const token = window.localStorage[STORAGE_KEYS.LOCAL.ID_TOKEN]
   try {
     const jwt = decode(token, { json: true })
     console.debug(jwt)
-    return (
-      jwt && {
-        id: jwt?.sub ? parseInt(jwt!.sub!) : undefined,
-        name: jwt?.name,
-        picture: jwt?.picture,
-      }
-    )
+    return jwt && jwt.user
   } catch (error) {
     console.error(error)
     return null

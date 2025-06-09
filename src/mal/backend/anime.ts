@@ -1,6 +1,6 @@
 import { AnimeListEntryDetail, AnimeListStatus, AnimeNode } from "../Anime"
 import { Page } from "../Page"
-import { buildMalUrl } from "../util"
+import { buildMalUrl } from "../malUtil"
 
 /**
  * Sort options for the user's anime list, as per MyAnimeList API.

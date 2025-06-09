@@ -1,13 +1,7 @@
 "use client"
 
-import {
-  AnimeListEntryDetail,
-  AnimeNode,
-  deleteIdToken,
-  loadUser,
-  MalUser,
-  Page,
-} from "@/mal"
+import { AnimeListEntryDetail, AnimeNode, MalUser, Page } from "@/mal"
+import { deleteIdToken, loadUserFromIdToken } from "@/mal/frontend"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -21,16 +15,17 @@ export default function MalBorda() {
 
   // on window load, check if
   useEffect(() => {
-    const user = loadUser()
+    const user = loadUserFromIdToken()
     if (user) setUserPartial(user)
     setLoading(false)
   }, [setUserPartial, setLoading])
 
   useEffect(() => {
-    fetch(window.origin + "/api/mal/anime")
-      .then((res) => res.json())
-      .then((al) => setAnimeList(al))
-      .catch((e) => console.error(e))
+    if (userPartial)
+      fetch(window.origin + "/api/mal/anime")
+        .then((res) => res.json())
+        .then((al) => setAnimeList(al))
+        .catch((e) => console.error(e))
   }, [setAnimeList])
 
   console.debug("user partial", userPartial)

@@ -7,10 +7,10 @@ import {
   malLogin,
   saveCodeVerifier,
   saveIdToken,
-} from "@/mal"
+} from "@/mal/frontend"
 import { MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
 import Link from "next/link"
-import { redirect, RedirectType, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 export default function MalAuth() {
@@ -43,8 +43,13 @@ function MalLogin() {
     setAuthUrl(url)
   }, [setAuthUrl])
 
+  console.debug(authurl)
+
+  //redirect(authurl, RedirectType.push)
   return authurl ? (
-    redirect(authurl, RedirectType.push)
+    <Link href={authurl}>
+      <button>Login to MAL</button>
+    </Link>
   ) : (
     <p>Redirecting to MAL Login...</p>
   )
@@ -62,6 +67,7 @@ function MalAuthCallback({
   const [error, setError] = useState<Error | undefined>()
 
   useEffect(() => {
+    console.log("requesting access token")
     malLogin(code, verifier)
       .then(({ idToken, user }) => {
         saveIdToken(idToken)
@@ -85,7 +91,14 @@ function MalAuthCallback({
       </p>
     </div>
   ) : userCtx.user ? (
-    redirect(window.location.origin + "/malborda")
+    <>
+      <Link href={window.location.origin + "/malborda"}>
+        <button>go home</button>
+      </Link>
+      {
+        //redirect(window.location.origin + "/malborda")
+      }
+    </>
   ) : (
     <div>Logining In...</div>
   )

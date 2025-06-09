@@ -1,16 +1,15 @@
 import env from "@/env"
-import { buildMalUrl, queryParamBuilder, STORAGE_KEYS } from "@/mal"
-import { getUser } from "@/mal/backend"
+import {
+  buildMalUrl,
+  MalUser,
+  queryParamBuilder,
+  STORAGE_KEYS,
+  TokenPayload,
+} from "@/mal"
+import { getMalUser } from "@/mal/backend"
 import { sign } from "jsonwebtoken"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
-
-type TokenPayload = {
-  token_type: "Bearer"
-  expires_in: number
-  access_token: string
-  refresh_token: string
-}
 
 export async function POST(req: NextRequest) {
   const { code, verifier } = await req.json()
@@ -18,11 +17,13 @@ export async function POST(req: NextRequest) {
   const cookieStore = await cookies()
 
   if (!verifier) {
-    return NextResponse.json("Unauthorized", { status: 401 })
+    return NextResponse.json("missing verifier", { status: 401 })
+  }
+  if (!code) {
+    return NextResponse.json("missing authcode", { status: 401 })
   }
 
   // get access token
-
   const malApiResponse = await fetch(buildMalUrl("oauth2/token", "v1"), {
     method: "POST",
     body: queryParamBuilder({
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
       code,
       code_verifier: verifier,
       grant_type: "authorization_code",
-      //redirect_uri: `${env.domain}/malborda`, this breaks auth idk why
+      redirect_uri: `http${env.ssl ? "s" : ""}://${env.domain}/malborda/auth`,
     }).toString(),
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -39,18 +40,19 @@ export async function POST(req: NextRequest) {
   })
 
   if (malApiResponse.status >= 500) {
-    console.log(malApiResponse)
+    console.error(malApiResponse)
     if (malApiResponse.headers.get("Content-Type") == "application/json") {
-      console.log(await malApiResponse.json())
+      console.error(await malApiResponse.json())
     }
     return NextResponse.json("MAL API Error", { status: 529 })
   }
 
   if (malApiResponse.status >= 400) {
+    console.log(malApiResponse)
     if (malApiResponse.headers.get("Content-Type") == "application/json") {
       console.log(await malApiResponse.json())
     }
-    return NextResponse.json("Unauthorized", { status: 401 })
+    return NextResponse.json("MAL Unauthorized", { status: 401 })
   }
 
   console.log("successful login")
@@ -69,15 +71,13 @@ export async function POST(req: NextRequest) {
   })
 
   // generate ID token
-  const user = await getUser(tokens.access_token)
+  const user = (await getMalUser(tokens.access_token)) as MalUser
 
   console.log(`uid: ${user.id}`)
 
-  const idToken = sign(
-    { sub: user.id, name: user.name, picture: user.picture },
-    env.jwtSecret,
-    { algorithm: "HS256" }
-  )
+  const idToken = sign({ sub: user.id, user }, env.jwtSecret, {
+    algorithm: "HS256",
+  })
 
   cookieStore.set(STORAGE_KEYS.LOCAL.ID_TOKEN, idToken, {
     secure: env.environment !== "local",
