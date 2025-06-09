@@ -10,7 +10,7 @@ export type AnimeListSort =
   | "anime_id"
 
 export type AnimeSearchParams = {
-  status?: AnimeListStatus
+  status?: AnimeWatchStatusType
   sort?: AnimeListSort
   limit?: number
   offset?: number
@@ -75,15 +75,21 @@ export type AnimeRecommendation = {
   num_recommendations: number
 }
 
-export type AnimeListStatus =
-  | "watching"
-  | "completed"
-  | "on_hold"
-  | "dropped"
-  | "plan_to_watch"
+export const AnimeWatchStatus = [
+  "watching",
+  "completed",
+  "on_hold",
+  "dropped",
+  "plan_to_watch",
+] as const
+
+/** @see https://stackoverflow.com/questions/44480644/string-union-to-string-array */
+type _animewatchstatustypeconversion = typeof AnimeWatchStatus
+
+export type AnimeWatchStatusType = _animewatchstatustypeconversion[number]
 
 export type AnimeListEntryDetail = {
-  status: AnimeListStatus
+  status: AnimeWatchStatusType
   score: number
   num_episodes_watched: number
   is_rewatching: boolean

@@ -1,3 +1,5 @@
+"use client"
+
 import { createContext, Dispatch } from "react"
 import { MALBAction } from "./MALBAction"
 import { MalBorda } from "./MalBorda"

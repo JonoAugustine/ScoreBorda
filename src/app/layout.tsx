@@ -1,9 +1,10 @@
+import { Footer, Navbar } from "@/components"
+import { MalUserProvider } from "@/state/malborda"
+import { config } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { Metadata } from "next"
 import "../style/index.scss"
 
-import { config } from "@fortawesome/fontawesome-svg-core"
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import { Footer, Navbar } from "../components"
 config.autoAddCss = false
 
 export const metadata: Metadata = {
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={``}>
-        <Navbar />
-        {children}
-        <Footer />
+        <MalUserProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </MalUserProvider>
       </body>
     </html>
   )

@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from "@/mal"
+import { AnimeWatchStatusType, STORAGE_KEYS } from "@/mal"
 import { getUserAnimeList } from "@/mal/backend"
 import { cookies } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
@@ -10,10 +10,12 @@ export async function GET(req: NextRequest) {
   if (!token) return NextResponse.json("Missing Token", { status: 401 })
 
   const page: number = parseInt(req.nextUrl.searchParams.get("page") || "0")
+  const status = req.nextUrl.searchParams.get("status") || undefined
 
   const animeList = await getUserAnimeList(token, {
-    limit: 50,
+    limit: 100,
     offset: page,
+    status: status as AnimeWatchStatusType | undefined,
   })
 
   return NextResponse.json(animeList)

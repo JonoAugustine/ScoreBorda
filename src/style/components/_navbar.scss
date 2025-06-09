@@ -13,6 +13,7 @@ nav.navbar {
 
   header {
     display: flex;
+    justify-self: flex-start;
     justify-content: center;
     align-items: center;
     padding: 0;
@@ -45,6 +46,13 @@ nav.navbar {
     }
   }
 
+  .nav-right {
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
   ul.nav-links {
     display: flex;
     list-style: none;
@@ -59,6 +67,40 @@ nav.navbar {
         &:hover {
           color: $c-main;
         }
+      }
+    }
+  }
+
+  .nav-mal-profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+
+    .nav-mal-profile-picture-container {
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+
+      img {
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      text-decoration: none;
+      color: $c-text;
+      font-size: 1rem;
+      font-weight: normal;
+      padding: unset;
+
+      &:hover {
+        color: $c-main;
+        transform: none;
+        box-shadow: none;
       }
     }
   }
