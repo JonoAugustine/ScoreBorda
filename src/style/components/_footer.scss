@@ -7,10 +7,12 @@ footer.page-footer {
   display: flex;
   justify-content: space-between;
   align-items: end;
+  pointer-events: none;
 
   padding: 1rem 1rem 0.5rem 1rem;
 
   a {
+    pointer-events: all;
     color: $c-text;
 
     &::before {
@@ -34,6 +36,7 @@ footer.page-footer {
     gap: 0;
 
     h1 {
+      pointer-events: none;
       font-size: 3vh;
 
       &:last-child {
