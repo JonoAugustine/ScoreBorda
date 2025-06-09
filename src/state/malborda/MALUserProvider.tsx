@@ -14,17 +14,17 @@ import { MalUserAction } from "./MALUserAction"
 import { malUserReducer } from "./MALUserReducer"
 
 export type MalUserContextType = {
-  idToken?: string
+  loading: boolean
   user?: MalUser
 }
 
-export const MalUserCtx = createContext<MalUserContextType>({})
+export const MalUserCtx = createContext<MalUserContextType>({ loading: true })
 export const MalUserDispatchCtx = createContext<
   Dispatch<MalUserAction> | undefined
 >(undefined)
 
 export function MalUserProvider({ children }: PropsWithChildren) {
-  const [userCtx, dispatch] = useReducer(malUserReducer, {})
+  const [userCtx, dispatch] = useReducer(malUserReducer, { loading: true })
 
   useEffect(() => {
     const savedUser = loadUserFromIdToken()
@@ -36,6 +36,7 @@ export function MalUserProvider({ children }: PropsWithChildren) {
     } else {
       dispatch({ type: "USER_SET", payload: savedUser })
     }
+    dispatch({ type: "LOADING_COMPLETE" })
   }, [dispatch])
 
   return (

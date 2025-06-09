@@ -10,7 +10,7 @@ import {
 } from "@/mal/frontend"
 import { MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+import { redirect, useSearchParams } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 export default function MalAuth() {
@@ -91,14 +91,7 @@ function MalAuthCallback({
       </p>
     </div>
   ) : userCtx.user ? (
-    <>
-      <Link href={window.location.origin + "/malborda"}>
-        <button>go home</button>
-      </Link>
-      {
-        //redirect(window.location.origin + "/malborda")
-      }
-    </>
+    redirect(window.location.origin + "/malborda")
   ) : (
     <div>Logining In...</div>
   )

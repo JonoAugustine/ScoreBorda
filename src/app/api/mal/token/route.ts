@@ -14,8 +14,6 @@ import { NextRequest, NextResponse } from "next/server"
 export async function POST(req: NextRequest) {
   const { code, verifier } = await req.json()
 
-  const cookieStore = await cookies()
-
   if (!verifier) {
     return NextResponse.json("missing verifier", { status: 401 })
   }
@@ -59,15 +57,20 @@ export async function POST(req: NextRequest) {
 
   const tokens: TokenPayload = await malApiResponse.json()
 
+  const cookieStore = await cookies()
+
   cookieStore.set(STORAGE_KEYS.COOKIES.ACCESS_TOKEN, tokens.access_token, {
     httpOnly: true,
     secure: env.environment !== "local",
-    expires: tokens.expires_in,
+    expires: tokens.expires_in / 2,
+    maxAge: tokens.expires_in / 2,
   })
 
   cookieStore.set(STORAGE_KEYS.COOKIES.REFRESH_TOKEN, tokens.refresh_token, {
     httpOnly: true,
     secure: env.environment !== "local",
+    maxAge: tokens.expires_in,
+    expires: tokens.expires_in,
   })
 
   // generate ID token

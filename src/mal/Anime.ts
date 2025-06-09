@@ -1,4 +1,22 @@
 /**
+ * Sort options for the user's anime list, as per MyAnimeList API.
+ * See: https://myanimelist.net/apiconfig/references/api/v2#operation/users_user_id_animelist_get
+ */
+export type AnimeListSort =
+  | "list_score"
+  | "list_updated_at"
+  | "anime_title"
+  | "anime_start_date"
+  | "anime_id"
+
+export type AnimeSearchParams = {
+  status?: AnimeListStatus
+  sort?: AnimeListSort
+  limit?: number
+  offset?: number
+}
+
+/**
  * Genre object as returned by MyAnimeList API.
  */
 export type AnimeGenre = {

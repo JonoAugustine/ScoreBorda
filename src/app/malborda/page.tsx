@@ -1,45 +1,36 @@
 "use client"
 
-import { AnimeListEntryDetail, AnimeNode, MalUser, Page } from "@/mal"
-import { deleteIdToken, loadUserFromIdToken } from "@/mal/frontend"
+import { AnimeListEntryDetail, AnimeNode, Page } from "@/mal"
+import { clientGetAnimeList, deleteIdToken } from "@/mal/frontend"
+import { MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
 import Image from "next/image"
 import { redirect } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 export default function MalBorda() {
-  const [loading, setLoading] = useState(true)
-  const [userPartial, setUserPartial] = useState<Partial<MalUser> | undefined>()
+  const { user, loading } = useContext(MalUserCtx)
+  const dispatch = useContext(MalUserDispatchCtx)!
   const [animeList, setAnimeList] = useState<
     Page<{ node: AnimeNode; list_status: AnimeListEntryDetail }> | undefined
   >()
 
-  // on window load, check if
   useEffect(() => {
-    const user = loadUserFromIdToken()
-    if (user) setUserPartial(user)
-    setLoading(false)
-  }, [setUserPartial, setLoading])
-
-  useEffect(() => {
-    if (userPartial)
-      fetch(window.origin + "/api/mal/anime")
-        .then((res) => res.json())
+    if (user && !loading)
+      clientGetAnimeList()
         .then((al) => setAnimeList(al))
         .catch((e) => console.error(e))
-  }, [setAnimeList])
-
-  console.debug("user partial", userPartial)
+  }, [setAnimeList, user, loading])
 
   if (loading) return <p>Loading MAL User...</p>
 
-  if (!userPartial) return redirect(window.location.origin + "/malborda/auth")
+  if (!user) return redirect(window.location.origin + "/malborda/auth")
 
   return (
     <div>
-      {userPartial.picture && (
-        <Image src={userPartial.picture} width={100} height={100} alt="" />
+      {user.picture && (
+        <Image src={user.picture} width={100} height={100} alt="" />
       )}
-      <p>{userPartial.name}</p>
+      <p>{user.name}</p>
       <ul>
         {animeList?.data?.map((listing) => (
           <li key={listing.node.id}>
@@ -62,7 +53,7 @@ export default function MalBorda() {
       <button
         onClick={() => {
           deleteIdToken()
-          setUserPartial(undefined)
+          dispatch({ type: "USER_DELETE" })
         }}
       >
         Logout
