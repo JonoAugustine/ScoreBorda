@@ -1,85 +1,44 @@
 "use client"
 
 import {
-  AnimeSearchParams,
-  AnimeSearchResponse,
-  AnimeWatchStatus,
-  AnimeWatchStatusType,
-  Page,
-} from "@/mal"
-import { clientGetAnimeList } from "@/mal/frontend"
-import { MalUserCtx } from "@/state/malborda"
-import Image from "next/image"
+  MalBorda,
+  MalBordaCtx,
+  MalBordaDispatchCtx,
+  MalBordaStage,
+  MalUserCtx,
+} from "@/state/malborda"
 import { redirect } from "next/navigation"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { LoadingScreen } from "@/components/LoadingScreen"
+import { MalBordaSetup } from "@/Screens/MALBorda"
 
-export default function MalBorda() {
-  const userCtx = useContext(MalUserCtx)
-  const { user, loading } = userCtx
-  const [params, setParams] = useState<AnimeSearchParams | undefined>({})
-  const [animeList, setAnimeList] = useState<
-    Page<AnimeSearchResponse> | undefined
-  >()
-
-  useEffect(() => {
-    if (user && !loading && params)
-      clientGetAnimeList(params)
-        .then((al) => setAnimeList(al))
-        .catch((e) => console.error(e))
-  }, [setAnimeList, user, loading, params])
+export default function MalBordaPage() {
+  const { user, loading } = useContext(MalUserCtx)
+  const borda = useContext(MalBordaCtx)
 
   if (loading) return <LoadingScreen text="Loading User" />
 
   if (!user) return redirect(window.location.origin + "/malborda/auth")
 
-  return (
-    <div>
-      <section>
-        <h1></h1>
+  return <div className="page mal-borda">{ScreenController(borda)}</div>
+}
+
+function ScreenController(borda: MalBorda) {
+  const dispatch = useContext(MalBordaDispatchCtx)
+  const back = () => dispatch({ type: "STAGE_BACK" })
+
+  switch (borda.stage) {
+    case MalBordaStage.SETUP:
+      return <MalBordaSetup />
+    default:
+      return (
         <div>
-          <label htmlFor="status">
-            Anime Status:
-            <select
-              onChange={(e) => {
-                setParams({
-                  ...params,
-                  status:
-                    e.target.value == "none"
-                      ? undefined
-                      : (e.target.value as AnimeWatchStatusType),
-                })
-              }}
-              name="status"
-              id="status"
-            >
-              <option value="none">none</option>
-              {AnimeWatchStatus.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
-          </label>
+          <h1>Unknown state: {borda.stage}</h1>
+          <button onClick={back}>back</button>
+          <button onClick={() => dispatch({ type: "STAGE_FIRST_WITH_RESET" })}>
+            Setup
+          </button>
         </div>
-      </section>
-      <section>
-        <ul>
-          {animeList?.data?.map(({ node }) => (
-            <li key={node.id}>
-              <p>{node.title}</p>
-              {node.main_picture?.medium && (
-                <Image
-                  src={node.main_picture!.medium!}
-                  width={50}
-                  height={50}
-                  alt={node.title}
-                />
-              )}
-            </li>
-          ))}
-        </ul>
-      </section>
-    </div>
-  )
+      )
+  }
 }

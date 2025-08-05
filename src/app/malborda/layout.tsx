@@ -3,7 +3,7 @@
 import { BordaProvider } from "@/state"
 import {
   MALBAction,
-  MalBDispatchCtx,
+  MalBordaDispatchCtx,
   MalBorda,
   MalBordaCtx,
   MalBordaStage,
@@ -29,7 +29,7 @@ export default function MalBordaLayout({ children }: PropsWithChildren) {
           anime: [],
         }}
         bordaContext={MalBordaCtx}
-        dispatchContext={MalBDispatchCtx}
+        dispatchContext={MalBordaDispatchCtx}
         reducer={function (_: MalBorda, __: MALBAction): MalBorda {
           delete _.date
           delete __.payload
