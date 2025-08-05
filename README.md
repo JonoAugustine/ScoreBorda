@@ -60,3 +60,20 @@ pnpm dev
 - Candidate-specific Features
 
 ## MAL Borda
+
+### Flow
+
+```mermaid
+flowchart TB
+    u(User Selects Rank to Borda) --> b1(malborda of given rank)
+    b1 --> b2
+    subgraph malborda
+        b2(borda rank anime as features) --> b3(present results)
+    end
+    b3 --> b4
+    subgraph adjustments
+        b4(suggest score adjustments)-->u2
+        u2(user adjusts score & comments)-->api
+        api(backend updates score & comments with timestamp)
+    end
+```

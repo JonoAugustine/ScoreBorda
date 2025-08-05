@@ -26,7 +26,5 @@ export async function GET(req: NextRequest) {
     fields: ["list_status"],
   })
 
-  console.debug(animeList)
-
   return NextResponse.json(animeList)
 }

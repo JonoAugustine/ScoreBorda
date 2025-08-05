@@ -1,6 +1,10 @@
-import { AnimeListEntryDetail, AnimeNode, AnimeSearchParams } from "../Anime"
-import { Page } from "../Page"
-import { buildMalUrl } from "../malUtil"
+import {
+  AnimeListEntryDetail,
+  AnimeNode,
+  AnimeSearchParams,
+  buildMalUrl,
+  Page,
+} from "@/mal"
 
 export async function getUserAnimeList(
   accessToken: string,
