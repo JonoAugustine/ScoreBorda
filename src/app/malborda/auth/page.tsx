@@ -10,7 +10,7 @@ import {
 } from "@/mal/frontend"
 import { MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
 import Link from "next/link"
-import { redirect, useSearchParams } from "next/navigation"
+import { redirect, RedirectType, useSearchParams } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 export default function MalAuth() {
@@ -45,11 +45,11 @@ function MalLogin() {
 
   console.debug(authurl)
 
-  //redirect(authurl, RedirectType.push)
+  //<Link href={authurl}>
+  //  <button>Login to MAL</button>
+  //</Link>
   return authurl ? (
-    <Link href={authurl}>
-      <button>Login to MAL</button>
-    </Link>
+    redirect(authurl, RedirectType.push)
   ) : (
     <p>Redirecting to MAL Login...</p>
   )

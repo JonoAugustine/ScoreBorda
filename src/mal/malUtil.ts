@@ -27,12 +27,13 @@ export function buildMalUrl(
   version: "v2" | "v1" = "v2",
   queryParams?: Record<string, any>
 ): string {
-  return (
+  const url =
     "https://" +
     (version == "v2" ? "api." : "") +
     malDomain +
     `${version}/${relativePath}${queryParams ? `?${queryParamBuilder(queryParams)}` : ""}`
-  )
+  console.debug("building url", url)
+  return url
 }
 
 /** Filters undefined params then uses the rest to build a URLSearchParams instance */

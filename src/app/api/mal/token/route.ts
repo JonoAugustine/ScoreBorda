@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (malApiResponse.status >= 400) {
-    console.log(malApiResponse)
+    console.debug(malApiResponse)
     if (malApiResponse.headers.get("Content-Type") == "application/json") {
       console.log(await malApiResponse.json())
     }

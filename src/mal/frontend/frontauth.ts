@@ -16,6 +16,16 @@ export function generateCodeVerifier(): string {
   return Array.from(array, dec2hex).join("")
 }
 
+/**
+ * https://myanimelist.net/v1/oauth2/authorize
+ *    ?response_type=code
+ *    &code_challenge=52762b90a964dd8ab4a0a85361d371410f1df47ece37f7674c341b8a
+ *    &state=sb_mal_auth
+ *    &redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fmalborda%2Fauth
+ *    &code_challenge_method=plain
+ * @param code_challenge
+ * @param redirect_uri
+ */
 export function generateMalAuthUrl(
   code_challenge: string,
   redirect_uri?: string
@@ -50,7 +60,10 @@ export async function malLogin(
       verifier,
     }),
   })
-  console.debug("response", response)
+  console.debug("login response", response)
+  if (!response.ok) {
+    throw new Error("Failed to login")
+  }
   return response.json()
 }
 
