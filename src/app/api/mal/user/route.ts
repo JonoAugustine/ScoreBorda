@@ -3,6 +3,10 @@ import { getMalUser } from "@/mal/backend"
 import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 
+/**
+ * Accepts a request with a MAL access token in the cookies.
+ * Responds with the MalUser if found.
+ */
 export async function GET() {
   const cookieStore = await cookies()
   const accessToken = cookieStore.get(STORAGE_KEYS.COOKIES.ACCESS_TOKEN)?.value
@@ -14,7 +18,9 @@ export async function GET() {
   const userOrError = await getMalUser(accessToken)
 
   if ("error" in userOrError) {
-    return NextResponse.json({ error: userOrError.error }, { status: 400 })
+    return NextResponse.json(userOrError.error ?? "Unknown MAL Error", {
+      status: 400,
+    })
   }
 
   const user = userOrError as MalUser

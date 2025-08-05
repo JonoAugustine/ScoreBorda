@@ -42,6 +42,7 @@ export async function malLogin(
   authCode: string,
   verifier: string
 ): Promise<{ idToken: string; user: string }> {
+  console.debug("logging in with auth code")
   const response = await fetch(`${window.location.origin}/api/mal/token`, {
     method: "POST",
     body: JSON.stringify({
@@ -49,20 +50,30 @@ export async function malLogin(
       verifier,
     }),
   })
+  console.debug("response", response)
   return response.json()
 }
 
 /** Load the user from a saved id token */
 export function loadUserFromIdToken(): MalUser | null {
+  console.debug("loading user from id token")
   const token = window.localStorage[STORAGE_KEYS.LOCAL.ID_TOKEN]
-  try {
-    const jwt = decode(token, { json: true })
-    console.debug(jwt)
-    return jwt && jwt.user
-  } catch (error) {
-    console.error(error)
+  if (!token) {
+    console.debug("no id token found")
     return null
   }
+  try {
+    const jwt = decode(token, { json: true })
+    if (jwt) {
+      console.debug("JWT decoded", jwt)
+      return jwt.user
+    } else {
+      console.debug("JWT decode failed")
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return null
 }
 
 export function saveIdToken(token: string) {

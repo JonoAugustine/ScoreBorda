@@ -11,6 +11,8 @@ export function NavMalProfileSection() {
 
   if (loading || !user) return null
 
+  console.log(user)
+
   return (
     <div className="nav-mal-profile">
       <div

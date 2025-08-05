@@ -29,9 +29,9 @@ export function MalUserProvider({ children }: PropsWithChildren) {
   useEffect(() => {
     const savedUser = loadUserFromIdToken()
     if (!savedUser) {
-      // when no idtoken found
+      // when no id token found, assume an access token exists & attempt to fetch user
       clientGetMalUser()
-        .then((user) => dispatch({ type: "USER_SET", payload: user }))
+        .then((user) => user && dispatch({ type: "USER_SET", payload: user }))
         .catch((e) => console.error(e))
     } else {
       dispatch({ type: "USER_SET", payload: savedUser })
