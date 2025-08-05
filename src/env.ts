@@ -1,9 +1,11 @@
+type Environments = "production" | "development" | "preview" | "local"
+
 const _domain = process.env.VERCEL_ENV?.match(/(production|local)/gi)
   ? process.env.VERCEL_PROJECT_PRODUCTION_URL!
   : process.env.VERCEL_BRANCH_URL!
 
 const env: {
-  environment: "production" | "development" | "preview" | "local"
+  environment: Environments
   domain: string
   ssl: boolean
   mal: {
@@ -12,7 +14,8 @@ const env: {
   }
   jwtSecret: string
 } = Object.freeze({
-  environment: process.env.VERCEL_ENV || "local",
+  environment: ((process.env.VERCEL_ENV as Environments) ||
+    "local") as Environments,
   domain: _domain,
   ssl: process.env.VERCEL_ENV !== "local",
   mal: {

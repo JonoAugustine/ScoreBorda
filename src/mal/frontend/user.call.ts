@@ -9,7 +9,7 @@ export async function clientGetMalUser(): Promise<MalUser | undefined> {
     try {
       console.error("failed to fetch user", await res.text())
     } catch (e) {
-      console.error("failed to fetch user, no error text received")
+      console.error("failed to fetch user, no error text received", e)
     }
     return undefined
   }

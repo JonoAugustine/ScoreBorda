@@ -1,7 +1,6 @@
 import {
-  AnimeListEntryDetail,
-  AnimeNode,
   AnimeSearchParams,
+  AnimeSearchResponse,
   buildMalUrl,
   Page,
 } from "@/mal"
@@ -9,7 +8,7 @@ import {
 export async function getUserAnimeList(
   accessToken: string,
   params?: AnimeSearchParams
-): Promise<Page<{ node: AnimeNode; list_status: AnimeListEntryDetail }>> {
+): Promise<Page<AnimeSearchResponse>> {
   const url = buildMalUrl("users/@me/animelist", "v2", {
     ...params,
     /** @see https://myanimelist.net/apiconfig/references/api/v2#section/Common-parameters */

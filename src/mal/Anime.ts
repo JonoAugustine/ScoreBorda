@@ -19,7 +19,7 @@ export type AnimeSearchParams = {
 }
 
 export type AnimeSearchResponse = {
-  node?: Partial<Anime>
+  node: Anime
   list_status?: AnimeListEntryDetail
 }
 

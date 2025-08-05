@@ -1,9 +1,8 @@
 "use client"
 
 import {
-  AnimeListEntryDetail,
-  AnimeNode,
   AnimeSearchParams,
+  AnimeSearchResponse,
   AnimeWatchStatus,
   AnimeWatchStatusType,
   Page,
@@ -19,7 +18,7 @@ export default function MalBorda() {
   const { user, loading } = userCtx
   const [params, setParams] = useState<AnimeSearchParams | undefined>({})
   const [animeList, setAnimeList] = useState<
-    Page<{ node: AnimeNode; list_status: AnimeListEntryDetail }> | undefined
+    Page<AnimeSearchResponse> | undefined
   >()
 
   useEffect(() => {
@@ -65,15 +64,15 @@ export default function MalBorda() {
       </section>
       <section>
         <ul>
-          {animeList?.data?.map((listing) => (
-            <li key={listing.node.id}>
-              <p>{listing.node.title}</p>
-              {listing.node.main_picture?.medium && (
+          {animeList?.data?.map(({ node }) => (
+            <li key={node.id}>
+              <p>{node.title}</p>
+              {node.main_picture?.medium && (
                 <Image
-                  src={listing.node.main_picture!.medium!}
+                  src={node.main_picture!.medium!}
                   width={50}
                   height={50}
-                  alt={listing.node.title}
+                  alt={node.title}
                 />
               )}
             </li>
