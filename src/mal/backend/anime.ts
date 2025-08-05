@@ -6,7 +6,10 @@ export async function getUserAnimeList(
   accessToken: string,
   params?: AnimeSearchParams
 ): Promise<Page<{ node: AnimeNode; list_status: AnimeListEntryDetail }>> {
-  const url = buildMalUrl("users/@me/animelist", "v2", params)
+  const url = buildMalUrl("users/@me/animelist", "v2", {
+    ...params,
+    fields: params?.fields?.join(","),
+  })
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${accessToken}` },

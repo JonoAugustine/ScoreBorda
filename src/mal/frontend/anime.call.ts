@@ -12,5 +12,10 @@ export async function clientGetAnimeList(
   const res = await fetch(
     location.origin + _path + "?" + queryParamBuilder(params)
   )
+  if (!res.ok)
+    throw new Error(
+      `Failed to fetch anime list: ${res.status} ${res.statusText}`
+    )
+
   return await res.json()
 }

@@ -14,31 +14,14 @@ export type AnimeSearchParams = {
   sort?: AnimeListSort
   limit?: number
   offset?: number
+  fields?: ("list_status" | keyof Anime)[]
 }
 
-/**
- * Genre object as returned by MyAnimeList API.
- */
-export type AnimeGenre = {
-  id: number
-  name: string
-}
+export type AnimeGenre = { id: number; name: string }
 
-/**
- * Studio object as returned by MyAnimeList API.
- */
-export type AnimeStudio = {
-  id: number
-  name: string
-}
+export type AnimeStudio = { id: number; name: string }
 
-/**
- * Picture object as returned by MyAnimeList API.
- */
-export type AnimePicture = {
-  medium: string
-  large: string
-}
+export type AnimePicture = { medium: string; large: string }
 
 export type AnimeNode = {
   id: number
