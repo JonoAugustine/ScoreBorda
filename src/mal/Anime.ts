@@ -14,7 +14,13 @@ export type AnimeSearchParams = {
   sort?: AnimeListSort
   limit?: number
   offset?: number
-  fields?: ("list_status" | keyof Anime)[]
+  /** @see https://myanimelist.net/apiconfig/references/api/v2#section/Common-parameters */
+  fields?: ("list_status" | keyof Anime | [keyof AnimeListEntryDetail])[]
+}
+
+export type AnimeSearchResponse = {
+  node?: Partial<Anime>
+  list_status?: AnimeListEntryDetail
 }
 
 export type AnimeGenre = { id: number; name: string }
@@ -76,6 +82,13 @@ export type AnimeListEntryDetail = {
   score: number
   num_episodes_watched: number
   is_rewatching: boolean
+  start_date?: string
+  finish_date?: string
+  priority: number
+  num_times_rewatched: number
+  rewatch_value: number
+  tags: string[]
+  comments: string
   updated_at: string
 }
 

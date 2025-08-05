@@ -1,4 +1,5 @@
 import { BaseBorda } from "../types"
+import { Anime } from "@/mal"
 
 export const enum MalBordaStage {
   SETUP = 0,
@@ -8,5 +9,5 @@ export const enum MalBordaStage {
 
 export type MalBorda = BaseBorda<MalBordaStage> & {
   stage: MalBordaStage
-  anime: any[]
+  anime: Anime[]
 }

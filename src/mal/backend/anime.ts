@@ -12,7 +12,13 @@ export async function getUserAnimeList(
 ): Promise<Page<{ node: AnimeNode; list_status: AnimeListEntryDetail }>> {
   const url = buildMalUrl("users/@me/animelist", "v2", {
     ...params,
-    fields: params?.fields?.join(","),
+    /** @see https://myanimelist.net/apiconfig/references/api/v2#section/Common-parameters */
+    fields: params?.fields
+      ?.map((field) => {
+        if (Array.isArray(field)) return `my_list_status{${field.join(",")}}`
+        else return field
+      })
+      .join(","),
   })
 
   const res = await fetch(url, {

@@ -5,10 +5,14 @@ import { NextRequest, NextResponse } from "next/server"
 import { parseIntOrDefault } from "@/util"
 
 export async function GET(req: NextRequest) {
+  console.log("Incoming request for user anime list")
   const cookieStore = await cookies()
   const token = cookieStore.get(STORAGE_KEYS.COOKIES.ACCESS_TOKEN)?.value
 
-  if (!token) return NextResponse.json("Missing Token", { status: 401 })
+  if (!token) {
+    console.log("Missing ")
+    return NextResponse.json("Missing Token", { status: 401 })
+  }
 
   const page: number = parseIntOrDefault(
     req.nextUrl.searchParams.get("page"),
@@ -18,13 +22,17 @@ export async function GET(req: NextRequest) {
   const limit = parseIntOrDefault(req.nextUrl.searchParams.get("limit"), 10)
   const sort = req.nextUrl.searchParams.get("sort") || "list_score"
 
-  const animeList = await getUserAnimeList(token, {
-    limit: limit,
-    offset: page,
-    status: status as AnimeWatchStatusType | undefined,
-    sort: sort as AnimeListSort,
-    fields: ["list_status"],
-  })
-
-  return NextResponse.json(animeList)
+  try {
+    const animeList = await getUserAnimeList(token, {
+      limit: limit,
+      offset: page,
+      status: status as AnimeWatchStatusType | undefined,
+      sort: sort as AnimeListSort,
+      fields: [["comments"]],
+    })
+    return NextResponse.json(animeList)
+  } catch (e) {
+    console.error(e)
+    return NextResponse.json("Failed to fetch user anime list")
+  }
 }
