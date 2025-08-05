@@ -3,7 +3,7 @@ export const APPLICATION_JSON = "application/json"
 
 export function parseIntOrDefault(any: any, defaultValue: number): number {
   try {
-    return parseInt(any)
+    return parseInt(any) || defaultValue
   } catch (e) {
     return defaultValue
   }
