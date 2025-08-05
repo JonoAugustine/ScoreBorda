@@ -8,7 +8,7 @@ import {
   FCBordaAction,
   Feature,
   StageAction,
-} from "../state/fcborda"
+} from "../../state/fcborda"
 
 type ScoringProps = {
   candidates: Candidate[]

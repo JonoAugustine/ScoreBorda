@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Accordian, ScoreBordaText, TagInput } from "../components"
-import { FCBordaAction, Candidate, Feature } from "../state/fcborda"
+import { Accordian, ScoreBordaText, TagInput } from "../../components"
+import { FCBordaAction, Candidate, Feature } from "../../state/fcborda"
 
 type EntitySetupSectionProps = {
   title: string

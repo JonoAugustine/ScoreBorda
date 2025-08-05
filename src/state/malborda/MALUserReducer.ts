@@ -6,6 +6,7 @@ export const malUserReducer: Reducer<MalUserContextType, MalUserAction> = (
   ctx: MalUserContextType,
   action: MalUserAction
 ) => {
+  console.debug("MALUserReducer", action)
   switch (action.type) {
     case "LOADING_COMPLETE":
       return { ...ctx, loading: false }

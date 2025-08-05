@@ -1,6 +1,6 @@
-@use "screen" as *;
-@use "../mixins" as *;
-@use "../variables" as *;
+@use "../screen" as *;
+@use "../../mixins" as *;
+@use "../../variables" as *;
 
 .screen.complete {
   @include screen;

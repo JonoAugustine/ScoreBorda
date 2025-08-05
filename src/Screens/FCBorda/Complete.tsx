@@ -1,4 +1,4 @@
-import { FCBorda, FCBordaAction, StageAction } from "../state/fcborda"
+import { FCBorda, FCBordaAction, StageAction } from "../../state/fcborda"
 
 type CompleteProps = {
   borda: FCBorda

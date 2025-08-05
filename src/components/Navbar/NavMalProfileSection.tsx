@@ -1,6 +1,6 @@
 "use client"
 
-import { deleteIdToken } from "@/mal/frontend"
+import { deleteIdToken, malLogout } from "@/mal/frontend"
 import { MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
 import Image from "next/image"
 import { useContext } from "react"
@@ -10,8 +10,6 @@ export function NavMalProfileSection() {
   const dispatch = useContext(MalUserDispatchCtx)!
 
   if (loading || !user) return null
-
-  console.log(user)
 
   return (
     <div className="nav-mal-profile">
@@ -29,8 +27,9 @@ export function NavMalProfileSection() {
       </div>
       <button
         onClick={() => {
-          deleteIdToken()
-          dispatch({ type: "USER_DELETE" })
+          malLogout()
+            .then(() => dispatch({ type: "USER_DELETE" }))
+            .then(deleteIdToken)
         }}
       >
         Logout

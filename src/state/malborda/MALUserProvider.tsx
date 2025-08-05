@@ -1,7 +1,7 @@
 "use client"
 
 import { MalUser } from "@/mal"
-import { loadUserFromIdToken } from "@/mal/frontend"
+import { clientGetMalUser, loadUserFromIdToken } from "@/mal/frontend"
 import {
   createContext,
   Dispatch,
@@ -9,7 +9,6 @@ import {
   useEffect,
   useReducer,
 } from "react"
-import { clientGetMalUser } from "../../mal/frontend/user.call"
 import { MalUserAction } from "./MALUserAction"
 import { malUserReducer } from "./MALUserReducer"
 
@@ -19,16 +18,16 @@ export type MalUserContextType = {
 }
 
 export const MalUserCtx = createContext<MalUserContextType>({ loading: true })
-export const MalUserDispatchCtx = createContext<
-  Dispatch<MalUserAction> | undefined
->(undefined)
+export const MalUserDispatchCtx = createContext<Dispatch<MalUserAction>>(() => {
+  throw new Error("MalUserDispatchCtx not provided")
+})
 
 export function MalUserProvider({ children }: PropsWithChildren) {
   const [userCtx, dispatch] = useReducer(malUserReducer, { loading: true })
 
   useEffect(() => {
     const savedUser = loadUserFromIdToken()
-    if (!savedUser) {
+    if (savedUser !== null) {
       // when no id token found, assume an access token exists & attempt to fetch user
       clientGetMalUser()
         .then((user) => user && dispatch({ type: "USER_SET", payload: user }))

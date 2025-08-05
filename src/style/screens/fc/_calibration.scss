@@ -1,7 +1,7 @@
-@use "screen" as *;
 @use "sass:color";
-@use "../mixins";
-@use "../variables";
+@use "../screen" as *;
+@use "../../mixins" as *;
+@use "../../variables" as *;
 
 .screen.calibration {
   @include screen;

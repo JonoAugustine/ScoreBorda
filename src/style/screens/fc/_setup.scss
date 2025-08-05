@@ -1,6 +1,6 @@
-@use "screen" as *;
-@use "../variables" as *;
-@use "../mixins" as *;
+@use "../screen" as *;
+@use "../../variables" as *;
+@use "../../mixins" as *;
 
 .screen.entity-setup {
   @include screen;

@@ -1,7 +1,7 @@
-@use "screen" as *;
+@use "../screen" as *;
 @use "sass:color";
-@use "../mixins";
-@use "../variables";
+@use "../../mixins" as *;
+@use "../../variables" as *;
 
 .screen.scoring {
   @include screen;

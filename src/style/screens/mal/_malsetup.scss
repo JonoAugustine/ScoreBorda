@@ -1,0 +1,7 @@
+@use "../screen" as *;
+@use "../../variables" as *;
+@use "../../mixins" as *;
+
+.screen.mal-setup {
+  @include screen;
+}

@@ -12,8 +12,10 @@ import { MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
 import Link from "next/link"
 import { redirect, RedirectType, useSearchParams } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import { LoadingScreen } from "@/components/LoadingScreen"
 
 export default function MalAuth() {
+  const user = useContext(MalUserCtx)
   const [loading, setLoading] = useState(true)
   const [verifier, setVerifier] = useState<string | undefined>(undefined)
   const searchParams = useSearchParams()
@@ -22,9 +24,13 @@ export default function MalAuth() {
   useEffect(() => {
     setVerifier(loadCodeVerifier())
     setLoading(false)
-  }, [setVerifier])
+  }, [setVerifier, setLoading])
 
-  if (loading) return <p>Loading...</p>
+  if (loading || user.loading) return <LoadingScreen />
+
+  if (user.user) {
+    return redirect(window.location.origin + "/malborda", RedirectType.push)
+  }
 
   return code && verifier ? (
     <MalAuthCallback code={code} verifier={verifier} />
@@ -43,15 +49,12 @@ function MalLogin() {
     setAuthUrl(url)
   }, [setAuthUrl])
 
-  console.debug(authurl)
-
-  //<Link href={authurl}>
-  //  <button>Login to MAL</button>
-  //</Link>
   return authurl ? (
-    redirect(authurl, RedirectType.push)
+    <Link href={authurl}>
+      <button>Login to MAL</button>
+    </Link>
   ) : (
-    <p>Redirecting to MAL Login...</p>
+    <LoadingScreen text="Redirecting to MAL Login" />
   )
 }
 
@@ -67,7 +70,7 @@ function MalAuthCallback({
   const [error, setError] = useState<Error | undefined>()
 
   useEffect(() => {
-    console.log("requesting access token")
+    console.info("requesting access token")
     malLogin(code, verifier)
       .then(({ idToken, user }) => {
         saveIdToken(idToken)
@@ -93,6 +96,6 @@ function MalAuthCallback({
   ) : userCtx.user ? (
     redirect(window.location.origin + "/malborda")
   ) : (
-    <div>Logining In...</div>
+    <LoadingScreen text="Logging In" />
   )
 }

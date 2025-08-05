@@ -1,6 +1,6 @@
 "use client"
 
-import { Calibration, Complete, EntitySetup, Scoring } from "@/Screens"
+import { Calibration, Complete, EntitySetup, Scoring } from "@/Screens/FCBorda"
 import {
   FCBorda,
   FCBordaAction,

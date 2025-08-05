@@ -7,11 +7,18 @@ import {
   MalBorda,
   MalBordaCtx,
   MalBordaStage,
+  MalUserCtx,
 } from "@/state/malborda"
 import { nanoid } from "nanoid"
-import { PropsWithChildren, Suspense } from "react"
+import { PropsWithChildren, Suspense, useContext } from "react"
+import { LoadingScreen } from "@/components/LoadingScreen"
 
 export default function MalBordaLayout({ children }: PropsWithChildren) {
+  const userCtx = useContext(MalUserCtx)
+  const { loading } = userCtx
+
+  if (loading) return <LoadingScreen text="Loading User" />
+
   return (
     <Suspense>
       <BordaProvider<MalBorda, MalBordaStage, MALBAction>

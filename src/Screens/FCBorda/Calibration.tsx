@@ -5,7 +5,7 @@ import {
   Feature,
   FeatureAction,
   StageAction,
-} from "../state/fcborda"
+} from "../../state/fcborda"
 
 type FeatureCalibrationProps = {
   features: Feature[]

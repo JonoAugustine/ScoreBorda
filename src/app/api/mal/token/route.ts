@@ -22,20 +22,26 @@ export async function POST(req: NextRequest) {
   }
 
   // get access token
-  const malApiResponse = await fetch(buildMalUrl("oauth2/token", "v1"), {
-    method: "POST",
-    body: queryParamBuilder({
-      client_id: env.mal.clientID,
-      client_secret: env.mal.clientSecret,
-      code,
-      code_verifier: verifier,
-      grant_type: "authorization_code",
-      redirect_uri: `http${env.ssl ? "s" : ""}://${env.domain}/malborda/auth`,
-    }).toString(),
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  })
+  let malApiResponse: Response
+  try {
+    malApiResponse = await fetch(buildMalUrl("oauth2/token", "v1"), {
+      method: "POST",
+      body: queryParamBuilder({
+        client_id: env.mal.clientID,
+        client_secret: env.mal.clientSecret,
+        code,
+        code_verifier: verifier,
+        grant_type: "authorization_code",
+        redirect_uri: `http${env.ssl ? "s" : ""}://${env.domain}/malborda/auth`,
+      }).toString(),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+  } catch (e) {
+    console.error(e)
+    return Response.json("MAL API Error", { status: 500 })
+  }
 
   if (malApiResponse.status >= 500) {
     console.error(malApiResponse)
@@ -88,4 +94,13 @@ export async function POST(req: NextRequest) {
   })
 
   return NextResponse.json({ user, idToken }, { status: 201 })
+}
+
+export async function DELETE() {
+  console.info("Incoming logout request")
+  console.info("Deleting cookies")
+  const cookieStore = await cookies()
+  cookieStore.delete(STORAGE_KEYS.COOKIES.ACCESS_TOKEN)
+  cookieStore.delete(STORAGE_KEYS.COOKIES.REFRESH_TOKEN)
+  return NextResponse.json("logged out")
 }

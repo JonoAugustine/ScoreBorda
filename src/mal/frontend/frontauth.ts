@@ -1,9 +1,9 @@
-"client only"
-
 import { decode } from "jsonwebtoken"
 import env from "../../env"
 import { MalUser } from "../User"
 import { buildMalUrl, STORAGE_KEYS } from "../malUtil"
+
+;("client only")
 
 // GENERATING CODE VERIFIER
 function dec2hex(dec: number) {
@@ -67,21 +67,30 @@ export async function malLogin(
   return response.json()
 }
 
+export async function malLogout(): Promise<boolean> {
+  console.info("logging out")
+  const response = await fetch(`${window.location.origin}/api/mal/token`, {
+    method: "DELETE",
+  })
+  console.debug("logout response", response)
+  return response.ok
+}
+
 /** Load the user from a saved id token */
 export function loadUserFromIdToken(): MalUser | null {
-  console.debug("loading user from id token")
+  console.info("loading user from id token")
   const token = window.localStorage[STORAGE_KEYS.LOCAL.ID_TOKEN]
   if (!token) {
-    console.debug("no id token found")
+    console.info("no id token found")
     return null
   }
   try {
     const jwt = decode(token, { json: true })
     if (jwt) {
-      console.debug("JWT decoded", jwt)
+      console.debug("id token decoded", jwt)
       return jwt.user
     } else {
-      console.debug("JWT decode failed")
+      console.error("id token decode failed")
     }
   } catch (error) {
     console.error(error)
@@ -93,6 +102,7 @@ export function saveIdToken(token: string) {
   window.localStorage[STORAGE_KEYS.LOCAL.ID_TOKEN] = token
 }
 
+/** Deletes the ID token from localstorage */
 export function deleteIdToken() {
   delete window.localStorage[STORAGE_KEYS.LOCAL.ID_TOKEN]
 }

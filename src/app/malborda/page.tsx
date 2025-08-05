@@ -12,6 +12,7 @@ import { MalUserCtx } from "@/state/malborda"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import { LoadingScreen } from "@/components/LoadingScreen"
 
 export default function MalBorda() {
   const userCtx = useContext(MalUserCtx)
@@ -28,7 +29,7 @@ export default function MalBorda() {
         .catch((e) => console.error(e))
   }, [setAnimeList, user, loading, params])
 
-  if (loading) return <p>Loading MAL User...</p>
+  if (loading) return <LoadingScreen text="Loading User" />
 
   if (!user) return redirect(window.location.origin + "/malborda/auth")
 

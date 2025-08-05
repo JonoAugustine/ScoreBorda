@@ -3,7 +3,7 @@
 import { MalUser } from "../User"
 
 export async function clientGetMalUser(): Promise<MalUser | undefined> {
-  console.log("fetching user")
+  console.info("fetching user")
   const res = await fetch(location.origin + "/api/mal/user")
   if (!res.ok) {
     try {
