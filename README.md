@@ -31,7 +31,19 @@ the Borda is able to remove much of the overwhelming and confusing aspects of co
 
 ## Running Locally
 
-SB5 is built using NextJS, just install and run to get a local server up:
+### Setup
+
+You'll need some environment variables to get the MALBorda working:
+
+```properties
+VERCEL_ENV="local"
+VERCEL_PROJECT_PRODUCTION_URL="localhost:3000"
+NEXT_PUBLIC_MAL_CLIENT_ID="<get at https://myanimelist.net/apiconfig>"
+MAL_CLIENT_SECRET="<get at https://myanimelist.net/apiconfig>"
+JWT_SECRET="<random string>"
+```
+
+### Running
 
 ```bash
 pnpm install
