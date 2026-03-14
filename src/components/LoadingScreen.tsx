@@ -1,7 +1,12 @@
 "use client"
 
-import { Treadmill } from "ldrs/react"
+import dynamic from "next/dynamic"
 import "ldrs/react/Treadmill.css"
+
+const Treadmill = dynamic(
+  () => import("ldrs/react").then((m) => ({ default: m.Treadmill })),
+  { ssr: false }
+)
 
 export function LoadingScreen({ text }: { text?: string }) {
   return (

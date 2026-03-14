@@ -8,31 +8,25 @@ import {
   Page,
 } from "@/mal"
 import { useContext, useEffect, useState } from "react"
-import { MalBordaCtx, MalBordaDispatchCtx, MalUserCtx } from "@/state/malborda"
+import {
+  AnimeListCacheCtx,
+  MalBordaCtx,
+  MalBordaDispatchCtx,
+  MalUserCtx,
+} from "@/state/malborda"
 import { clientGetAnimeList } from "@/mal/frontend"
 import Image from "next/image"
 import { parseIntOrDefault } from "@/util"
 
 export function MalBordaSetup() {
-  const { user, loading } = useContext(MalUserCtx)
+  const { cache, status } = useContext(AnimeListCacheCtx)
   const borda = useContext(MalBordaCtx)
   const dispatch = useContext(MalBordaDispatchCtx)
   const [params, setParams] = useState<AnimeSearchParams | undefined>({})
   const [score, setScore] = useState(10)
 
-  const [animeList, setAnimeList] = useState<
-    Page<AnimeSearchResponse> | undefined
-  >()
-
-  useEffect(() => {
-    if (user && !loading && params)
-      clientGetAnimeList(params)
-        .then((al) => setAnimeList(al))
-        .catch((e) => console.error(e))
-  }, [setAnimeList, user, loading, params])
-
   return (
-    <div>
+    <div className="screen mal-setup">
       <div>
         <label htmlFor="status">
           Anime Status:
@@ -77,18 +71,23 @@ export function MalBordaSetup() {
         </label>
       </div>
       <section>
-        <ul>
-          {animeList?.data?.map(({ node }) => (
+        <ul className="anime-grid">
+          {cache.all().map(({ node }) => (
             <li key={node.id}>
-              <p>{node.title}</p>
               {node.main_picture?.medium && (
-                <Image
-                  src={node.main_picture!.medium!}
-                  width={50}
-                  height={50}
-                  alt={node.title}
-                />
+                <div
+                  className="image-container"
+                  style={{ position: "relative" }}
+                >
+                  <Image
+                    src={node.main_picture!.medium!}
+                    fill
+                    objectFit="contain"
+                    alt={node.title}
+                  />
+                </div>
               )}
+              <p>{node.title}</p>
             </li>
           ))}
         </ul>

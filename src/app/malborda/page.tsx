@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  AnimeListCacheProvider,
   MalBorda,
   MalBordaCtx,
   MalBordaDispatchCtx,
@@ -21,9 +22,11 @@ export default function MalBordaPage() {
   if (!user) return redirect("/malborda/auth")
 
   return (
-    <div className="page mal-borda">
-      <ScreenController borda={borda} />
-    </div>
+    <AnimeListCacheProvider>
+      <div className="page mal-borda">
+        <ScreenController borda={borda} />
+      </div>
+    </AnimeListCacheProvider>
   )
 }
 

@@ -4,4 +4,29 @@
 
 .screen.mal-setup {
   @include screen;
+
+  .anime-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 2rem;
+
+    li {
+      list-style: none;
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+
+      p {
+        text-wrap: nowrap;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: clip;
+      }
+
+      .image-container {
+        height: 200px;
+      }
+    }
+  }
 }

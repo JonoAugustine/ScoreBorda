@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       offset: page,
       status: status as AnimeWatchStatusType | undefined,
       sort: sort as AnimeListSort,
-      fields: ["comments"],
+      fields: ["list_status"],
     })
     return NextResponse.json(animeList)
   } catch (e) {
