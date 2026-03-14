@@ -4,6 +4,7 @@ export const STORAGE_KEYS = Object.freeze({
   },
   LOCAL: {
     ID_TOKEN: "sbIdToken",
+    ANIME_LIST: "sbAnimeList",
   },
   COOKIES: {
     ACCESS_TOKEN: "sbAccesToken",
