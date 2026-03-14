@@ -1,7 +1,15 @@
-import { createContext } from "react"
-import { FCBorda } from "./FCBorda"
+import { createContext, Dispatch } from "react"
+import { FCBorda, FCBordaStage } from "./FCBorda"
 import { FCBordaAction } from "./FCBAction"
 
-export const FCBordaCtx = createContext<FCBorda | null>(null)
-export const FCBordaDispatchCtx =
-  createContext<React.Dispatch<FCBordaAction> | null>(null)
+export const FCBordaCtx = createContext<FCBorda>({
+  stage: FCBordaStage.SETUP,
+  features: [],
+  candidates: [],
+  _id: "",
+  name: "",
+})
+
+export const FCBordaDispatchCtx = createContext<Dispatch<FCBordaAction>>(() => {
+  throw new Error("FCBordaDispatchCtx not provided")
+})
