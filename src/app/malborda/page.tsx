@@ -18,12 +18,16 @@ export default function MalBordaPage() {
 
   if (loading) return <LoadingScreen text="Loading User" />
 
-  if (!user) return redirect(window.location.origin + "/malborda/auth")
+  if (!user) return redirect("/malborda/auth")
 
-  return <div className="page mal-borda">{ScreenController(borda)}</div>
+  return (
+    <div className="page mal-borda">
+      <ScreenController borda={borda} />
+    </div>
+  )
 }
 
-function ScreenController(borda: MalBorda) {
+function ScreenController({ borda }: { borda: MalBorda }) {
   const dispatch = useContext(MalBordaDispatchCtx)
   const back = () => dispatch({ type: "STAGE_BACK" })
 

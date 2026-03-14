@@ -14,8 +14,15 @@ export type AnimeSearchParams = {
   sort?: AnimeListSort
   limit?: number
   offset?: number
-  /** @see https://myanimelist.net/apiconfig/references/api/v2#section/Common-parameters */
-  fields?: ("list_status" | keyof Anime | [keyof AnimeListEntryDetail])[]
+  /**
+   * Choosing fields
+   *
+   * By default, the API doesn’t return all fields.
+   *
+   * You can choose the fields that you want returned with the fields' parameter.
+   * @see https://myanimelist.net/apiconfig/references/api/v2#section/Common-parameters
+   */
+  fields?: ("list_status" | keyof Anime | keyof AnimeListEntryDetail)[]
 }
 
 export type AnimeSearchResponse = {

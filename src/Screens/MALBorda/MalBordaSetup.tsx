@@ -8,7 +8,7 @@ import {
   Page,
 } from "@/mal"
 import { useContext, useEffect, useState } from "react"
-import { MalBordaCtx, MalUserCtx, MalUserDispatchCtx } from "@/state/malborda"
+import { MalBordaCtx, MalBordaDispatchCtx, MalUserCtx } from "@/state/malborda"
 import { clientGetAnimeList } from "@/mal/frontend"
 import Image from "next/image"
 import { parseIntOrDefault } from "@/util"
@@ -16,7 +16,7 @@ import { parseIntOrDefault } from "@/util"
 export function MalBordaSetup() {
   const { user, loading } = useContext(MalUserCtx)
   const borda = useContext(MalBordaCtx)
-  const dispatch = useContext(MalUserDispatchCtx)
+  const dispatch = useContext(MalBordaDispatchCtx)
   const [params, setParams] = useState<AnimeSearchParams | undefined>({})
   const [score, setScore] = useState(10)
 
@@ -67,9 +67,10 @@ export function MalBordaSetup() {
             id="score"
             defaultValue={10}
           >
-            {new Array(11).fill(0).map((_, score) => (
-              <option key={10 - score} value={10 - score}>
-                {10 - score}
+            <option value="none">none</option>
+            {new Array(10).fill(0).map((_, i) => (
+              <option key={10 - i} value={10 - i}>
+                {10 - i}
               </option>
             ))}
           </select>

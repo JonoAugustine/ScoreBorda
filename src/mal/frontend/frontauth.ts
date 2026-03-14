@@ -2,7 +2,6 @@ import { decode } from "jsonwebtoken"
 import env from "../../env"
 import { MalUser } from "../User"
 import { buildMalUrl, STORAGE_KEYS } from "../malUtil"
-
 ;("client only")
 
 // GENERATING CODE VERIFIER

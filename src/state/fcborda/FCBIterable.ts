@@ -3,7 +3,7 @@
  *
  * @param {Array} a items An array containing the items.
  */
-export const shuffleArray = (a: any[]): any[] => {
+export const shuffleArray = <T>(a: T[]): T[] => {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     const x = a[i]

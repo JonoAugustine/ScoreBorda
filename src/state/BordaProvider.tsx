@@ -6,8 +6,8 @@ export type BordaProviderProps<
   BordaStage,
   ActionType,
 > = PropsWithChildren & {
-  bordaContext: Context<BordaType | null>
-  dispatchContext: Context<Dispatch<ActionType> | null>
+  bordaContext: Context<BordaType>
+  dispatchContext: Context<Dispatch<ActionType>>
   borda?: BordaType
   reducer: BordaReducerType<BordaType, ActionType>
   default: BordaType

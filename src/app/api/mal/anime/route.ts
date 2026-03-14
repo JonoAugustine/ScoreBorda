@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const token = cookieStore.get(STORAGE_KEYS.COOKIES.ACCESS_TOKEN)?.value
 
   if (!token) {
-    console.log("Missing ")
+    console.log("Missing access token")
     return NextResponse.json("Missing Token", { status: 401 })
   }
 
@@ -21,6 +21,8 @@ export async function GET(req: NextRequest) {
   const status = req.nextUrl.searchParams.get("status") || undefined
   const limit = parseIntOrDefault(req.nextUrl.searchParams.get("limit"), 10)
   const sort = req.nextUrl.searchParams.get("sort") || "list_score"
+  const fields = req.nextUrl.searchParams.get("fields") || undefined
+  console.log(`Fields ${fields}`)
 
   try {
     const animeList = await getUserAnimeList(token, {
@@ -28,7 +30,7 @@ export async function GET(req: NextRequest) {
       offset: page,
       status: status as AnimeWatchStatusType | undefined,
       sort: sort as AnimeListSort,
-      fields: [["comments"]],
+      fields: ["comments"],
     })
     return NextResponse.json(animeList)
   } catch (e) {
