@@ -1,16 +1,12 @@
-import { AnimeListSort, AnimeWatchStatusType, STORAGE_KEYS } from "@/mal"
-import { getUserAnimeList } from "@/mal/backend"
-import { cookies } from "next/headers"
+import { AnimeListSort, AnimeWatchStatusType } from "@/mal"
+import { getUserAnimeList, readAccessToken } from "@/mal/backend"
 import { NextRequest, NextResponse } from "next/server"
 import { parseIntOrDefault } from "@/util"
 
 export async function GET(req: NextRequest) {
-  console.log("Incoming request for user anime list")
-  const cookieStore = await cookies()
-  const token = cookieStore.get(STORAGE_KEYS.COOKIES.ACCESS_TOKEN)?.value
+  const token = await readAccessToken()
 
   if (!token) {
-    console.log("Missing access token")
     return NextResponse.json("Missing Token", { status: 401 })
   }
 

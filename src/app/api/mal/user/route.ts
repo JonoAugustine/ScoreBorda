@@ -1,6 +1,5 @@
-import { MalUser, STORAGE_KEYS } from "@/mal"
-import { getMalUser } from "@/mal/backend"
-import { cookies } from "next/headers"
+import { MalUser } from "@/mal"
+import { getMalUser, readAccessToken } from "@/mal/backend"
 import { NextResponse } from "next/server"
 
 /**
@@ -8,8 +7,7 @@ import { NextResponse } from "next/server"
  * Responds with the MalUser if found.
  */
 export async function GET() {
-  const cookieStore = await cookies()
-  const accessToken = cookieStore.get(STORAGE_KEYS.COOKIES.ACCESS_TOKEN)?.value
+  const accessToken = await readAccessToken()
 
   if (!accessToken) {
     return NextResponse.json("missing access token", { status: 401 })
