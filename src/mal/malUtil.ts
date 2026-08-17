@@ -14,6 +14,17 @@ export const STORAGE_KEYS = Object.freeze({
 
 export type MalApiError = { error?: string; message?: string }
 
+/** A non-2xx response from the MAL API, carrying the status so callers can map it onward. */
+export class MalRequestError extends Error {
+  constructor(
+    readonly status: number,
+    message: string
+  ) {
+    super(message)
+    this.name = "MalRequestError"
+  }
+}
+
 export const malDomain = "myanimelist.net/"
 
 /**
