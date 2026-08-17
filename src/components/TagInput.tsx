@@ -12,10 +12,6 @@ type TagInputProps = {
   remove: (str: string) => void
 }
 
-interface AddValueEvent extends React.FormEvent<HTMLFormElement> {
-  target: HTMLFormElement & { [key: number]: { value: string } }
-}
-
 /**
  *
  * @param {{values: string[]}} o - props
@@ -23,13 +19,13 @@ interface AddValueEvent extends React.FormEvent<HTMLFormElement> {
 export default function TagInput({ name, values, add, remove }: TagInputProps) {
   const nameInput = useRef<HTMLInputElement>({} as HTMLInputElement)
 
-  const addValue = (event: AddValueEvent) => {
+  const addValue = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault() // Stop page refresh
+    const input = event.currentTarget[0] as HTMLInputElement
     // Confirm value is not duplicate
-    if (!values.includes(event.target[0].value)) {
-      add(event.target[0].value)
-      //setValues([...values, event.target[0].value])
-      event.target[0].value = "" // clear text field
+    if (!values.includes(input.value)) {
+      add(input.value)
+      input.value = "" // clear text field
       nameInput.current.focus() // reset focus to input
     } else {
       // TODO toast saying duplicate
