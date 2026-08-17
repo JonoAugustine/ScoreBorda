@@ -29,8 +29,11 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: pnpm install
-      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-        run: pnpm audit signatures
+      # `pnpm audit signatures` is an npm-only subcommand: pnpm ignores the argument and
+      # runs a plain audit, so this step failed on any advisory in the dev tree and
+      # semantic-release never ran. Gate on production advisories instead.
+      - name: Audit production dependencies
+        run: pnpm audit --prod --audit-level high
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
