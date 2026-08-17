@@ -1,0 +1,5 @@
+# pnpm 10 reads overrides from here, not from package.json's "pnpm" field.
+overrides:
+  # micromatch already allows ^2.3.1, but the lockfile pinned the pre-patch 2.3.1.
+  # 2.3.2 fixes the extglob ReDoS (GHSA-c2c7-rcm5-vvqj, GHSA-3v7f-55p6-f55p).
+  picomatch@2: ^2.3.2
