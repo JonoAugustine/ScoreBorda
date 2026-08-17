@@ -5,9 +5,7 @@ export type FeatureAction =
   | "FEATURE_WEIGHT_CLEAR_ALL"
 
 export type CandidateAction =
-  | "CANDIDATE_NEW"
-  | "CANDIDATE_REMOVE"
-  | "CANDIDATE_FEATURE_SCORE_UP"
+  "CANDIDATE_NEW" | "CANDIDATE_REMOVE" | "CANDIDATE_FEATURE_SCORE_UP"
 
 export type StageAction =
   | "STAGE_NEXT"
