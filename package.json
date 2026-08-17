@@ -7,7 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
     "style/fix": "prettier --config .prettierrc.yaml --write src *.ts",
     "style/check": "prettier --config .prettierrc.yaml --check src *.ts"
   },

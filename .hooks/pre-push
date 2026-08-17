@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
+set -uo pipefail
 
 echo 'Pre-Push Hook'
 
-STAGED=$(git diff --name-only --diff-filter d --staged | grep -e '\.tsx\?$')
+# Check the commits being pushed, not the index. The index is normally empty by push
+# time, so the old `--staged` diff made this hook a guaranteed no-op on a clean tree.
+if UPSTREAM=$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null); then
+  RANGE="$UPSTREAM...HEAD"
+else
+  # First push of a branch: no upstream to compare against, so use the default branch.
+  RANGE="origin/master...HEAD"
+fi
 
-if [ -z "$STAGED" ]; then
-  echo 'No staged sourcecode files. skipping linter and formatter.'
+FILES=$(git diff --name-only --diff-filter=d "$RANGE" -- '*.ts' '*.tsx')
+
+if [ -z "$FILES" ]; then
+  echo "No sourcecode changes in $RANGE. Skipping linter and formatter."
   exit 0
 fi
 
-pnpm eslint $STAGED || exit 1
+echo "Checking files changed in $RANGE:"
+echo "$FILES"
 
-echo '\n----------------------\n'
-echo 'Formatting staged files:\n'
-pnpm prettier --config .prettierrc.yaml -c $STAGED || exit 1
+pnpm eslint $FILES || exit 1
 
-echo '\n----------------------\n'
-echo 'Re-adding staged Files:\n' && echo $STAGED
-git add $STAGED || exit 1
+printf '\n----------------------\n\n'
+echo 'Checking formatting:'
+pnpm prettier --config .prettierrc.yaml -c $FILES || exit 1

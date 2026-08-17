@@ -34,7 +34,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/malborda/callback",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
