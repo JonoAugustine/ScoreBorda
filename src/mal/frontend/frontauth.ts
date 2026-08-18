@@ -2,7 +2,8 @@ import { decode } from "jsonwebtoken"
 import env from "../../env"
 import { MalUser } from "../User"
 import { buildMalUrl, STORAGE_KEYS } from "../malUtil"
-;("client only")
+
+// client only
 
 // GENERATING CODE VERIFIER
 function dec2hex(dec: number) {
@@ -86,7 +87,7 @@ export function loadUserFromIdToken(): MalUser | null {
   try {
     const jwt = decode(token, { json: true })
     if (jwt) {
-      console.debug("id token decoded", jwt)
+      // Deliberately not logged: the payload carries the whole MAL user object.
       return jwt.user
     } else {
       console.error("id token decode failed")
