@@ -1,13 +1,14 @@
 {
   "name": "scoreborda",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "private": true,
   "packageManager": "pnpm@10.7.1",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
     "style/fix": "prettier --config .prettierrc.yaml --write src *.ts",
     "style/check": "prettier --config .prettierrc.yaml --check src *.ts"
   },

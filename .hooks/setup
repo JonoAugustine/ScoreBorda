@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-echo "Cloning hooks into .git/hooks/"
+# Point git at .hooks directly rather than copying into .git/hooks. Copies go stale the
+# moment a hook is edited, and the old `cp "$SCRIPT_DIR/pre-commit" .git/hooks` only
+# worked when the script happened to be run from the repo root.
+cd "$(git rev-parse --show-toplevel)"
+git config core.hooksPath .hooks
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
-cp "$SCRIPT_DIR/pre-commit" .git/hooks
-cp "$SCRIPT_DIR/pre-push" .git/hooks
-
-echo "done"
+echo "core.hooksPath -> .hooks"

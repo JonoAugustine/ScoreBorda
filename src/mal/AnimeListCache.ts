@@ -24,8 +24,7 @@ export class AnimeListCache {
     return this.all().filter((entry) => {
       const ls = entry.list_status
       if (status !== undefined && ls?.status !== status) return false
-      return !(minScore !== undefined && (ls?.score ?? 0) < minScore);
-
+      return !(minScore !== undefined && (ls?.score ?? 0) < minScore)
     })
   }
 

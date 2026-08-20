@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install PNPM
+        uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          # Keep in step with the release job in release.yaml.
+          node-version: "26.x"
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Check formatting
+        run: pnpm style/check
+      - name: Build
+        run: pnpm build
+      # `pnpm lint` is deliberately not gated yet: master carries 15 eslint errors, all of
+      # which live in code that issues #3, #4, #6, #14 and #21 are going to rewrite. Add
+      # the step here once #17 closes.
