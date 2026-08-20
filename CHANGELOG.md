@@ -1,5 +1,11 @@
 ScoreBorda ChangeLog
 
+## [4.0.3](https://github.com/JonoAugustine/ScoreBorda/compare/v4.0.2...v4.0.3) (2026-08-20)
+
+### Bug Fixes
+
+* **malborda:** stop bouncing logged-in users to the login screen ([e711968](https://github.com/JonoAugustine/ScoreBorda/commit/e711968232e4c605dd8c1f596a5dec676b8e2ef3)), closes [#3](https://github.com/JonoAugustine/ScoreBorda/issues/3) [#4](https://github.com/JonoAugustine/ScoreBorda/issues/4) [#4](https://github.com/JonoAugustine/ScoreBorda/issues/4)
+
 ## [4.0.2](https://github.com/JonoAugustine/ScoreBorda/compare/v4.0.1...v4.0.2) (2026-08-18)
 
 ### Bug Fixes
