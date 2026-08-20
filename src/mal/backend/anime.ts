@@ -2,6 +2,7 @@ import {
   AnimeSearchParams,
   AnimeSearchResponse,
   buildMalUrl,
+  MalRequestError,
   Page,
 } from "@/mal"
 
@@ -25,7 +26,8 @@ export async function getUserAnimeList(
   })
 
   if (!res.ok) {
-    throw new Error(
+    throw new MalRequestError(
+      res.status,
       `Failed to fetch user anime list: ${res.status} ${res.statusText}`
     )
   }

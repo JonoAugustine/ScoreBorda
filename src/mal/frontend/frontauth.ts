@@ -51,7 +51,7 @@ export function loadCodeVerifier(): string {
 export async function malLogin(
   authCode: string,
   verifier: string
-): Promise<{ idToken: string; user: string }> {
+): Promise<{ idToken: string; user: MalUser }> {
   console.debug("logging in with auth code")
   const response = await fetch(`${window.location.origin}/api/mal/token`, {
     method: "POST",
